@@ -1,4 +1,6 @@
 #include <iostream>
+#include "OBATargetMachine.h"
+#include "PortsLayout.h"
 
 using namespace std;
 
