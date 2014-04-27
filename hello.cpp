@@ -1,7 +1,7 @@
 #include <iostream>
 #include "OBATargetMachine.h"
 #include "PortsLayout.h"
-pragma comment(lib, "OBAVirtualTarget.lib")
+#pragma comment(lib, "OBAVirtualTarget.lib")
 
 using namespace std;
 
