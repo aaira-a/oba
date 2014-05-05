@@ -19,12 +19,12 @@ int main() {
 	//cout << "unsigned:\t" << sizeof(unsigned int) << " bytes" << endl;
 
 	int input;
-	int output;
+	unsigned int output;  //implicit cast of bool return from fn to unsigned int
 
 	for (;;) {
 		cout << "Please input an unsigned int: \t";
 		cin >> input;
-		output = getOddParityBit(input);
+		output = getOddParityBit(input);  
 		cout << "The output is: \t" << output << endl;
 	}
 }
