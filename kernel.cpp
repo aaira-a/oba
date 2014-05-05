@@ -41,16 +41,27 @@ void periodicHandler (Interrupt sig) {
 
 
 void getAndPrintPulse() {
-		CounterWord *pulse;
-		pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
-		cout << " \n\t" << pulse->pulsecount;
+	CounterWord *pulse;
+	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
+	cout << " \n\t" << pulse->pulsecount;
 }
+
 
 int main(){
 
     int i=0;
 	msg=msg1;
 	DisplayBufferAddress	 *display;
+
+
+	LedCommandWord *led;  //init struct pointer
+	led =  (LedCommandWord *)(OTM::ledCommandByteAddress); //mapping between local struct pointer to otm struct pointer 
+
+	//assign/override accordingly
+	led->led_1=1;   //left   // green
+	led->led_2=1;   //center // yellow
+	led->led_3=1;   //right  // red
+
 
 try {
 // initialisation of the interrupt vector
@@ -76,6 +87,7 @@ try {
  for (;;)
 	{
 		getAndPrintPulse(); //print current pulse to console
+		//sendLEDsignal();
 
 // write the message to the display
 
