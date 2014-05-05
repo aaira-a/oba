@@ -46,14 +46,7 @@ void getAndPrintPulse() {
 	cout << " \n\t" << pulse->pulsecount;
 }
 
-
-int main(){
-
-    int i=0;
-	msg=msg1;
-	DisplayBufferAddress	 *display;
-
-
+void sendLEDsignal() {
 	LedCommandWord *led;  //init struct pointer
 	led =  (LedCommandWord *)(OTM::ledCommandByteAddress); //mapping between local struct pointer to otm struct pointer 
 
@@ -61,7 +54,14 @@ int main(){
 	led->led_1=1;   //left   // green
 	led->led_2=1;   //center // yellow
 	led->led_3=1;   //right  // red
+}
 
+
+int main(){
+
+    int i=0;
+	msg=msg1;
+	DisplayBufferAddress	 *display;
 
 try {
 // initialisation of the interrupt vector
@@ -87,7 +87,7 @@ try {
  for (;;)
 	{
 		getAndPrintPulse(); //print current pulse to console
-		//sendLEDsignal();
+		sendLEDsignal();
 
 // write the message to the display
 
