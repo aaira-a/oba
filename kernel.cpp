@@ -40,6 +40,13 @@ void periodicHandler (Interrupt sig) {
 }
 
 
+void sendThrottleSignal(){
+		ThrottleCommandWord *throttle;
+		throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
+		throttle->outputvoltagevalue=80;
+		throttle->paritybit=1;
+}
+
 void getAndPrintPulse() {
 	CounterWord *pulse;
 	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
@@ -62,6 +69,8 @@ int main(){
     int i=0;
 	msg=msg1;
 	DisplayBufferAddress	 *display;
+
+
 
 try {
 // initialisation of the interrupt vector
@@ -96,6 +105,9 @@ try {
 // idle the CPU		
 
 		OTM::idleWait (75);
+
+		sendThrottleSignal();
+
 	}
    }
 
