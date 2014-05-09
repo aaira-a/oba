@@ -41,16 +41,23 @@ void periodicHandler (Interrupt sig) {
 
 
 void sendThrottleSignal(){
-		ThrottleCommandWord *throttle;
-		throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
-		throttle->outputvoltagevalue=80;
-		throttle->paritybit=1;
+	ThrottleCommandWord *throttle;
+	throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
+	throttle->outputvoltagevalue=80;
+	throttle->paritybit=1;
+}
+
+
+void getThrottleResponse(){
+	ThrottleResponseWord *throttle;
+	throttle = (ThrottleResponseWord *)(OTM::throttlePositionWordAddress);
+	//cout << throttle->inputvoltagevalue <<endl;  //uncomment to see the value
 }
 
 void getAndPrintPulse() {
 	CounterWord *pulse;
 	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
-	cout << " \n\t" << pulse->pulsecount;
+	//cout << " \n\t" << pulse->pulsecount;  //uncomment to see the value
 }
 
 void sendLEDsignal() {
@@ -104,10 +111,10 @@ try {
 			display->displaymessage[j]=msg[j];
 // idle the CPU		
 
-		OTM::idleWait (75);
+			OTM::idleWait (75);
 
-		sendThrottleSignal();
-
+			sendThrottleSignal();
+			getThrottleResponse();
 	}
    }
 
