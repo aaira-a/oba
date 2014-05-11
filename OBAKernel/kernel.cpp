@@ -13,14 +13,11 @@ static	char msg4[] = "                         ";
 static volatile int temp = 100;
 static const unsigned int	periodInMillisecond = 1000; 
 unsigned x = 0;
-const double calibrationconst = 5291.0053;
-unsigned int lastpulse = 0;
-double speed = 0;
+
 
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 
 //prototypesssss:
-//double getCurrentSpeed();
 void sendThrottleSignal();
 void getThrottleResponse();
 void sendLEDsignal();
@@ -45,7 +42,8 @@ void myInterruptHandler (Interrupt sig) {
 		//	msg = msg4;
 		//cout << ++x << endl;cout.flush();
 		//getCurrentSpeed();
-		cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
+		//cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
+		cout << OBA_SHAFT_Interface::getCurrentSpeed() << endl;
 		break;
 	default :
 	cout << "handler " << sig <<endl;
@@ -53,15 +51,6 @@ void myInterruptHandler (Interrupt sig) {
 }
 
 
-/*
-double getCurrentSpeed() {
-	
-	speed = ((getCurrentPulse() - lastpulse)/calibrationconst)*3600;
-	lastpulse = getCurrentPulse();
-	cout << speed << " : " << getCurrentPulse()/calibrationconst << endl;
-	return speed;
-}
-*/
 
 void sendThrottleSignal() {
 	ThrottleCommandWord *throttle;
