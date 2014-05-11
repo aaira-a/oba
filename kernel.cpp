@@ -21,7 +21,7 @@ double speed = 0;
 //prototypesssss:
 double getCurrentSpeed();
 
-void periodicHandler (Interrupt sig) {
+void interruptHandler (Interrupt sig) {
 	ControlPanelInterruptStatusWord *keyId;
 	switch (sig)
 	{
@@ -98,9 +98,9 @@ int main(){
 try {
 // initialisation of the interrupt vector
 
-		OTM::interruptVector[IT_controlPanel] = periodicHandler;
-        OTM::interruptVector[IT_drivingControls] = periodicHandler;
-		OTM::interruptVector[IT_timer] = periodicHandler;
+		OTM::interruptVector[IT_controlPanel] = interruptHandler;
+        OTM::interruptVector[IT_drivingControls] = interruptHandler;
+		OTM::interruptVector[IT_timer] = interruptHandler;
 // set the timer
 
 		OTM::setPeriodicTimer(periodInMillisecond, 0);
