@@ -17,10 +17,10 @@ const double calibrationconst = 5291.0053;
 unsigned int lastpulse = 0;
 double speed = 0;
 
+#include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 
 //prototypesssss:
-unsigned int getCurrentPulse();
-double getCurrentSpeed();
+//double getCurrentSpeed();
 void sendThrottleSignal();
 void getThrottleResponse();
 void sendLEDsignal();
@@ -44,20 +44,15 @@ void myInterruptHandler (Interrupt sig) {
 		//if (temp < 0)
 		//	msg = msg4;
 		//cout << ++x << endl;cout.flush();
-		getCurrentSpeed();
+		//getCurrentSpeed();
 		break;
 	default :
 	cout << "handler " << sig <<endl;
 	}
 }
 
-unsigned int getCurrentPulse() {
-	CounterWord *pulse;
-	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
-	return pulse->pulsecount;
-	//cout << " \n\t" << pulse->pulsecount;  //uncomment to see the value
-}
 
+/*
 double getCurrentSpeed() {
 	
 	speed = ((getCurrentPulse() - lastpulse)/calibrationconst)*3600;
@@ -65,6 +60,7 @@ double getCurrentSpeed() {
 	cout << speed << " : " << getCurrentPulse()/calibrationconst << endl;
 	return speed;
 }
+*/
 
 void sendThrottleSignal() {
 	ThrottleCommandWord *throttle;
