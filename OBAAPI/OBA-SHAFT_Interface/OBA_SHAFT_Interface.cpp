@@ -7,7 +7,7 @@ OBA_SHAFT_Interface::OBA_SHAFT_Interface() {
 }
 
 
-unsigned int getCurrentPulse() {
+unsigned int OBA_SHAFT_Interface::getCurrentPulse() {
 	CounterWord *pulse;
 	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
 	return pulse->pulsecount;

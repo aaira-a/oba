@@ -45,6 +45,7 @@ void myInterruptHandler (Interrupt sig) {
 		//	msg = msg4;
 		//cout << ++x << endl;cout.flush();
 		//getCurrentSpeed();
+		cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
 		break;
 	default :
 	cout << "handler " << sig <<endl;
