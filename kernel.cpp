@@ -11,36 +11,58 @@ static	char msg2[] = "Keyboard Pressed         ";
 static	char msg3[] = "Driving Control          ";
 static	char msg4[] = "                         ";
 static volatile int temp = 100;
-static const unsigned int	periodInMillisecond = 100; 
+static const unsigned int	periodInMillisecond = 1000; 
+unsigned x = 0;
+const double calibrationconst = 5291.0053;
+unsigned int lastpulse = 0;
+double speed = 0;
+
+
+//prototypesssss:
+double getCurrentSpeed();
 
 void periodicHandler (Interrupt sig) {
 	ControlPanelInterruptStatusWord *keyId;
 	switch (sig)
 	{
 	case IT_controlPanel : 
-		keyId = (ControlPanelInterruptStatusWord *) (OTM::controlPanelInterruptWordAddress);
-		cout << "Key Id : " << keyId->keyCode << endl;
-		msg = msg2; temp = 10;
+		//keyId = (ControlPanelInterruptStatusWord *) (OTM::controlPanelInterruptWordAddress);
+		//cout << "Key Id : " << keyId->keyCode << endl;
+		//msg = msg2; temp = 10;
 		break;
 	case IT_drivingControls :
-		cout << "IT driving" <<endl;
-		msg = msg3; temp = 10;
+		//cout << "IT driving" <<endl;
+		//msg = msg3; temp = 10;
 		break;
 	case IT_timer :
-		temp--;
+		//temp--;
 		// if the time is consumed to display Interrupt message, the default message is set
-		if (temp < 0)
-			msg = msg4;
-
-		cout << ".";cout.flush();
+		//if (temp < 0)
+		//	msg = msg4;
+		//cout << ++x << endl;cout.flush();
+		getCurrentSpeed();
 		break;
 	default :
 	cout << "handler " << sig <<endl;
 	}
 }
 
+unsigned int getCurrentPulse() {
+	CounterWord *pulse;
+	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
+	return pulse->pulsecount;
+	//cout << " \n\t" << pulse->pulsecount;  //uncomment to see the value
+}
 
-void sendThrottleSignal(){
+double getCurrentSpeed() {
+	
+	speed = ((getCurrentPulse() - lastpulse)/calibrationconst)*3600;
+	lastpulse = getCurrentPulse();
+	cout << speed << " : " << getCurrentPulse()/calibrationconst << endl;
+	return speed;
+}
+
+void sendThrottleSignal() {
 	ThrottleCommandWord *throttle;
 	throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
 	throttle->outputvoltagevalue=80;
@@ -48,16 +70,10 @@ void sendThrottleSignal(){
 }
 
 
-void getThrottleResponse(){
+void getThrottleResponse() {
 	ThrottleResponseWord *throttle;
 	throttle = (ThrottleResponseWord *)(OTM::throttlePositionWordAddress);
 	//cout << throttle->inputvoltagevalue <<endl;  //uncomment to see the value
-}
-
-void getAndPrintPulse() {
-	CounterWord *pulse;
-	pulse = (CounterWord *) (OTM::pulseCounterWordAddress);
-	//cout << " \n\t" << pulse->pulsecount;  //uncomment to see the value
 }
 
 void sendLEDsignal() {
@@ -102,7 +118,7 @@ try {
 
  for (;;)
 	{
-		getAndPrintPulse(); //print current pulse to console
+		//getAndPrintPulse(); //print current pulse to console
 		sendLEDsignal();
 
 // write the message to the display
@@ -111,7 +127,7 @@ try {
 			display->displaymessage[j]=msg[j];
 // idle the CPU		
 
-			OTM::idleWait (75);
+			//OTM::idleWait (75);
 
 			sendThrottleSignal();
 			getThrottleResponse();
