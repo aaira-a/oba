@@ -19,7 +19,11 @@ double speed = 0;
 
 
 //prototypesssss:
+unsigned int getCurrentPulse();
 double getCurrentSpeed();
+void sendThrottleSignal();
+void getThrottleResponse();
+void sendLEDsignal();
 
 void myInterruptHandler (Interrupt sig) {
 	ControlPanelInterruptStatusWord *keyId;
