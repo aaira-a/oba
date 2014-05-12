@@ -17,46 +17,18 @@ unsigned x = 0;
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 
-enum KEYMAP {
-	KEY_0,
-	KEY_1,
-	KEY_2,
-	KEY_3,
-	KEY_4,
-	KEY_5,
-	KEY_6,
-	KEY_7,
-	KEY_8,
-	KEY_9,
-	KEY_ACTIVATION,
-	KEY_DEACTIVATION,
-	KEY_RESUME,
-	KEY_START_ACCELERATION,
-	KEY_STOP_ACCELERATION,
-	KEY_START_CALIBRATION,
-	KEY_STOP_CALIBRATION,
-	KEY_TRIP_START,
-	KEY_FUEL_QUANTITY,
-	KEY_AVERAGE_SPEED,
-	KEY_SERVICE_COMPLETED,
-	KEY_VALIDATION,
-	KEY_CANCEL,
-	KEY_AVERAGE_CONSUMPTION,
-	KEY_DECIMAL
-};
-
 
 void myInterruptHandler (Interrupt sig) {
 	
 	ControlPanelInterruptStatusWord *keyId;
-	KEYMAP pressedKey;
+	OBA_MMI_Interface::KEYMAP pressedKey;
 
 	switch (sig)
 	{
 	case IT_controlPanel : 
 		keyId = (ControlPanelInterruptStatusWord *) (OTM::controlPanelInterruptWordAddress);
 		
-		pressedKey = static_cast<KEYMAP>(keyId->keyCode);
+		pressedKey = static_cast<OBA_MMI_Interface::KEYMAP>(keyId->keyCode);
 
 		cout << "Key Id : " << pressedKey << endl;
 		//msg = msg2; temp = 10;

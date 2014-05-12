@@ -6,6 +6,7 @@ class OBA_MMI_Interface {
 		OBA_MMI_Interface();
 		static void sendLEDsignal();
 		static void displayMessage();
+		static enum KEYMAP;
 };
 
 #endif
