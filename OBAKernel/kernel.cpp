@@ -23,6 +23,7 @@ void myInterruptHandler (Interrupt sig) {
 	
 	ControlPanelInterruptStatusWord *keyId;
 	OBA_MMI_Interface::KEYMAP pressedKey;
+	DrivingStationInterruptStatusWord *eventDSTA;
 
 	switch (sig)
 	{
@@ -34,10 +35,19 @@ void myInterruptHandler (Interrupt sig) {
 		cout << "Key Id : " << pressedKey << endl;
 		//msg = msg2; temp = 10;
 		break;
+
 	case IT_drivingControls :
+		eventDSTA = (DrivingStationInterruptStatusWord *) (OTM::drivingControlsInterruptWordAddress);
+
+		cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
+		"\nbrake: " << eventDSTA->brakeFlag <<
+		"\nclutch:" << eventDSTA->clutchFlag <<
+		"\nignition:" << eventDSTA-> ignitionFlag;
+
 		//cout << "IT driving" <<endl;
 		//msg = msg3; temp = 10;
 		break;
+
 	case IT_timer :
 		//temp--;
 		// if the time is consumed to display Interrupt message, the default message is set
@@ -47,12 +57,13 @@ void myInterruptHandler (Interrupt sig) {
 		//getCurrentSpeed();
 		//cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
 
+			/*
 			cout << "\n\ngear: " << OBA_DSTA_Interface::getEngagedGearState() << 
 			"\nignition: " << OBA_DSTA_Interface::getIgnitionState() << 
 			"\nclutch: " << OBA_DSTA_Interface::getClutchState() << 
 			"\nbrake: " << OBA_DSTA_Interface::getBrakeState() << 
 			"\naccelerator: " << OBA_DSTA_Interface::getAcceleratorState();
-
+			*/
 		break;
 	default :
 	cout << "handler " << sig <<endl;
