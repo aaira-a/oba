@@ -46,6 +46,13 @@ void myInterruptHandler (Interrupt sig) {
 		//cout << ++x << endl;cout.flush();
 		//getCurrentSpeed();
 		//cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
+
+			cout << "\n\ngear: " << OBA_DSTA_Interface::getEngagedGearState() << 
+			"\nignition: " << OBA_DSTA_Interface::getIgnitionState() << 
+			"\nclutch: " << OBA_DSTA_Interface::getClutchState() << 
+			"\nbrake: " << OBA_DSTA_Interface::getBrakeState() << 
+			"\naccelerator: " << OBA_DSTA_Interface::getAcceleratorState();
+
 		break;
 	default :
 	cout << "handler " << sig <<endl;
@@ -98,7 +105,7 @@ try {
 
 			OBA_THRO_Interface::sendThrottleSignal();
 			//cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
-			cout << OBA_DSTA_Interface::getEngagedGearState() << endl;
+
 	}
    }
 
