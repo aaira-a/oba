@@ -17,9 +17,8 @@ unsigned x = 0;
 
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
+#include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 
-//prototypesssss:
-void sendLEDsignal();
 
 void myInterruptHandler (Interrupt sig) {
 	ControlPanelInterruptStatusWord *keyId;
@@ -50,15 +49,7 @@ void myInterruptHandler (Interrupt sig) {
 	}
 }
 
-void sendLEDsignal() {
-	LedCommandWord *led;  //init struct pointer
-	led =  (LedCommandWord *)(OTM::ledCommandByteAddress); //mapping between local struct pointer to otm struct pointer 
 
-	//assign/override accordingly
-	led->led_1=1;   //left   // green
-	led->led_2=1;   //center // yellow
-	led->led_3=1;   //right  // red
-}
 
 
 int main(){
@@ -92,8 +83,7 @@ try {
 
  for (;;)
 	{
-		//getAndPrintPulse(); //print current pulse to console
-		sendLEDsignal();
+		OBA_MMI_Interface::sendLEDsignal();
 
 // write the message to the display
 
