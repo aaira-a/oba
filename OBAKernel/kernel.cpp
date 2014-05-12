@@ -5,8 +5,6 @@
 
 using namespace std;
 
-static  char * msg; 
-static	char msg1[] = "Hello World!             ";
 static	char msg2[] = "Keyboard Pressed         ";
 static	char msg3[] = "Driving Control          ";
 static	char msg4[] = "                         ";
@@ -55,8 +53,8 @@ void myInterruptHandler (Interrupt sig) {
 int main(){
 
     int i=0;
-	msg=msg1;
-	DisplayBufferAddress	 *display;
+	
+	
 
 
 
@@ -75,7 +73,7 @@ try {
 
 // keep the display buffer 
 
-		display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
+		
 		
 
 
@@ -87,8 +85,8 @@ try {
 
 // write the message to the display
 
-		for (int j=0;j<20;j++)
-			display->displaymessage[j]=msg[j];
+		OBA_MMI_Interface::displayMessage();
+
 // idle the CPU		
 
 			//OTM::idleWait (75);

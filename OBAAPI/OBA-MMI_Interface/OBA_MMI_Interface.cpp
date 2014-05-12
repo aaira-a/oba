@@ -15,3 +15,15 @@ void OBA_MMI_Interface::sendLEDsignal() {
 	led->led_2=1;   //center // yellow
 	led->led_3=1;   //right  // red
 }
+
+void OBA_MMI_Interface::displayMessage() {
+	static  char *msg;
+	static	char msg1[] = "Hello World!             ";
+	DisplayBufferAddress	 *display;
+	display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
+
+	msg=msg1;
+
+	for (int i=0;i<20;i++)
+		display->displaymessage[i]=msg[i];
+}

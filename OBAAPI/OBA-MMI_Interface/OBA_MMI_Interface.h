@@ -5,6 +5,7 @@ class OBA_MMI_Interface {
 	public:
 		OBA_MMI_Interface();
 		static void sendLEDsignal();
+		static void displayMessage();
 };
 
 #endif
