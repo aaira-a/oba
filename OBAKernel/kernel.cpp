@@ -16,6 +16,7 @@ unsigned x = 0;
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
+#include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
 
 
 void myInterruptHandler (Interrupt sig) {
@@ -45,8 +46,6 @@ void myInterruptHandler (Interrupt sig) {
 		//cout << ++x << endl;cout.flush();
 		//getCurrentSpeed();
 		//cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
-		
-		//cout << OBA_SHAFT_Interface::getCurrentSpeed() << endl;
 		break;
 	default :
 	cout << "handler " << sig <<endl;
@@ -99,6 +98,7 @@ try {
 
 			OBA_THRO_Interface::sendThrottleSignal();
 			//cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
+			cout << OBA_DSTA_Interface::getEngagedGearState() << endl;
 	}
    }
 
