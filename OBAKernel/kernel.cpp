@@ -16,10 +16,9 @@ unsigned x = 0;
 
 
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+#include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 
 //prototypesssss:
-void sendThrottleSignal();
-void getThrottleResponse();
 void sendLEDsignal();
 
 void myInterruptHandler (Interrupt sig) {
@@ -43,27 +42,12 @@ void myInterruptHandler (Interrupt sig) {
 		//cout << ++x << endl;cout.flush();
 		//getCurrentSpeed();
 		//cout << OBA_SHAFT_Interface::getCurrentPulse() << endl;
-		cout << OBA_SHAFT_Interface::getCurrentSpeed() << endl;
+		
+		//cout << OBA_SHAFT_Interface::getCurrentSpeed() << endl;
 		break;
 	default :
 	cout << "handler " << sig <<endl;
 	}
-}
-
-
-
-void sendThrottleSignal() {
-	ThrottleCommandWord *throttle;
-	throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
-	throttle->outputvoltagevalue=80;
-	throttle->paritybit=1;
-}
-
-
-void getThrottleResponse() {
-	ThrottleResponseWord *throttle;
-	throttle = (ThrottleResponseWord *)(OTM::throttlePositionWordAddress);
-	//cout << throttle->inputvoltagevalue <<endl;  //uncomment to see the value
 }
 
 void sendLEDsignal() {
@@ -119,8 +103,8 @@ try {
 
 			//OTM::idleWait (75);
 
-			sendThrottleSignal();
-			getThrottleResponse();
+			OBA_THRO_Interface::sendThrottleSignal();
+			cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
 	}
    }
 
