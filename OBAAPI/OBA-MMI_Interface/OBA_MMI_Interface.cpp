@@ -1,8 +1,11 @@
 #include "../../OBAKERNEL/OBATargetMachine.h"
 #include "../../OBAKERNEL/PortsLayout.h"
 #include "OBA_MMI_Interface.h"
+#include "../OBA-THRO_Interface/OBA_THRO_Interface.h"
 
 OBA_MMI_Interface::OBA_MMI_Interface() {
+
+}
 
 	enum KEYMAP {
 		KEY_0,
@@ -32,9 +35,6 @@ OBA_MMI_Interface::OBA_MMI_Interface() {
 		KEY_DECIMAL
 	};
 
-}
-
-
 void OBA_MMI_Interface::sendLEDsignal() {
 	LedCommandWord *led;
 	led =  (LedCommandWord *)(OTM::ledCommandByteAddress);
@@ -61,3 +61,20 @@ void OBA_MMI_Interface::displayMessage() {
 //static	char msg2[] = "Keyboard Pressed         ";
 //static	char msg3[] = "Driving Control          ";
 //static	char msg4[] = "                         ";
+
+
+void OBA_MMI_Interface::keyPressHandler(int pressedKey) {
+
+	KEYMAP keyEnum = static_cast<OBA_MMI_Interface::KEYMAP>(pressedKey);
+
+	switch (keyEnum) {
+
+	case KEY_ACTIVATION:
+		OBA_THRO_Interface::sendThrottleSignal(40);
+		break;
+
+	default :
+		break;
+	}
+
+}

@@ -26,9 +26,10 @@ void myInterruptHandler (Interrupt sig) {
 	{
 	case IT_controlPanel : 
 		
-		pressedKey = static_cast<OBA_MMI_Interface::KEYMAP>(keyId->keyCode);
+		OBA_MMI_Interface::keyPressHandler(keyId->keyCode);
+		//pressedKey = static_cast<OBA_MMI_Interface::KEYMAP>(keyId->keyCode);
 
-		cout << "Key Id : " << pressedKey << endl;
+		cout << "Key Id : " << keyId->keyCode << endl;
 		//msg = msg2; temp = 10;
 		break;
 
@@ -101,7 +102,7 @@ try {
 
 			//OTM::idleWait (75);
 
-			OBA_THRO_Interface::sendThrottleSignal(40);
+			//OBA_THRO_Interface::sendThrottleSignal(40);
 			cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
 
 	}

@@ -7,6 +7,7 @@ class OBA_MMI_Interface {
 		static void sendLEDsignal();
 		static void displayMessage();
 		static enum KEYMAP;
+		static void keyPressHandler(int pressedKey);
 };
 
 #endif
