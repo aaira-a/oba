@@ -13,22 +13,22 @@ unsigned int OBA_DSTA_Interface::getEngagedGearState() {
 	return state->engagedGear;
 }
 
-unsigned int OBA_DSTA_Interface::getIgnitionState() {
+bool OBA_DSTA_Interface::getIgnitionState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->ignitionState;
 }
 
-unsigned int OBA_DSTA_Interface::getClutchState() {
+bool OBA_DSTA_Interface::getClutchState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->clutchState;
 }
 
-unsigned int OBA_DSTA_Interface::getBrakeState() {
+bool OBA_DSTA_Interface::getBrakeState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->brakeState;
 }
 
-unsigned int OBA_DSTA_Interface::getAcceleratorState() {
+bool OBA_DSTA_Interface::getAcceleratorState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->acceleratorState;
 }
