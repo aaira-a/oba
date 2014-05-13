@@ -56,3 +56,8 @@ void OBA_MMI_Interface::displayMessage() {
 	for (int i=0;i<20;i++)
 		display->displaymessage[i]=msg[i];
 }
+
+//unused char arrays from eg
+//static	char msg2[] = "Keyboard Pressed         ";
+//static	char msg3[] = "Driving Control          ";
+//static	char msg4[] = "                         ";

@@ -5,9 +5,6 @@
 
 using namespace std;
 
-static	char msg2[] = "Keyboard Pressed         ";
-static	char msg3[] = "Driving Control          ";
-static	char msg4[] = "                         ";
 static volatile int temp = 100;
 static const unsigned int	periodInMillisecond = 1000; 
 unsigned x = 0;
