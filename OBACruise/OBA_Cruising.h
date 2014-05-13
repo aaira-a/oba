@@ -4,9 +4,6 @@
 class OBA_Cruising {
 	public:
 		OBA_Cruising();
-		static bool isActive;
-		static bool isSuspended;
-		static int cruisingSpeed;
 
 		static void activateCruising();
 		static void stopCruising();
@@ -19,6 +16,13 @@ class OBA_Cruising {
 		static void requestDrivingStationStatus();	// delegate call to dsta ? or move method to dsta?
 		static void requestMaintainSpeed();			// delegate call to thro? or maintain logic here ?
 		static void requestStopMaintainSpeed();		// delegate call to thro? or maintain logic here ?
+
+		static bool FisActive();
+		static bool FisSuspended(); 
+		static int FcruisingSpeed();
+
 };
+
+typedef OBA_Cruising	CRUISE;
 
 #endif

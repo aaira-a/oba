@@ -14,7 +14,7 @@ unsigned x = 0;
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 #include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
-
+#include "../OBACruise/OBA_Cruising.h"
 
 void myInterruptHandler (Interrupt sig) {
 	
@@ -62,6 +62,11 @@ void myInterruptHandler (Interrupt sig) {
 			"\nbrake: " << OBA_DSTA_Interface::getBrakeState() << 
 			"\naccelerator: " << OBA_DSTA_Interface::getAcceleratorState();
 			*/
+
+			cout << "\n\ncruise isActive : " << CRUISE::FisActive() <<
+					"  \ncruise cruisingSpeed : " << CRUISE::FcruisingSpeed() <<
+					"  \ncruise isSuspended : " << CRUISE::FisSuspended() << endl;
+
 		break;
 	default :
 	cout << "handler " << sig <<endl;
@@ -103,8 +108,7 @@ try {
 			//OTM::idleWait (75);
 
 			//OBA_THRO_Interface::sendThrottleSignal(40);
-			cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
-
+			//cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
 	}
    }
 

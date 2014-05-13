@@ -7,17 +7,18 @@
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 
 OBA_Cruising::OBA_Cruising() {
-
-	static bool isActive;
-	static bool isSuspended;
-	static int cruisingSpeed;
 }
 
-void OBA_Cruising::activateCruising() {
+	static bool isActive = 		0;
+	static bool isSuspended = 	0;
+	static int cruisingSpeed = 	0;
+
+void CRUISE::activateCruising() {
 	
 	if (validateCruisingRequest()) {
-		//OBA_THRO_Interface::maintainSpeed();
-		THRO::sendThrottleSignal(77);
+		cruisingSpeed = SHAFT::getCurrentSpeed();
+		isActive = 1;
+		THRO::maintainSpeed(cruisingSpeed);
 		MMI::sendLEDsignal(1, 1);
 	}
 
@@ -76,4 +77,16 @@ void OBA_Cruising::requestMaintainSpeed() {			// delegate call to thro? or maint
 
 void OBA_Cruising::requestStopMaintainSpeed() {		// delegate call to thro? or maintain logic here ?
 
-}	
+}
+
+bool CRUISE::FisActive() {
+	return isActive;
+}
+
+bool CRUISE::FisSuspended() {
+	return isSuspended;
+}
+
+int CRUISE::FcruisingSpeed() {
+	return cruisingSpeed;
+}

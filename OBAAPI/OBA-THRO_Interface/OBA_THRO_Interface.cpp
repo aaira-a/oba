@@ -29,5 +29,5 @@ bool THRO::getOddParityBit(unsigned int x) {
 }
 
 void THRO::maintainSpeed(int speed) {
-
+	THRO::sendThrottleSignal(77);
 }
