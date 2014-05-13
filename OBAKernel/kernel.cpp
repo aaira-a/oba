@@ -68,17 +68,10 @@ void myInterruptHandler (Interrupt sig) {
 	}
 }
 
-
-
-
 int main(){
 
     int i=0;
 	
-	
-
-
-
 try {
 // initialisation of the interrupt vector
 
@@ -93,9 +86,6 @@ try {
         OTM::enabledInterruptsRegister = allObaRelatedInterrupts;
 
 // keep the display buffer 
-
-		
-		
 
 
 // infinite loop
@@ -125,6 +115,5 @@ try {
       // context failure : useless to run OBA.
       throw;
    }
-
 
 }
