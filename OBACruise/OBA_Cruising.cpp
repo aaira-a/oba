@@ -1,6 +1,8 @@
 #include "../OBAKERNEL/OBATargetMachine.h"
 #include "../OBAKERNEL/PortsLayout.h"
 #include "OBA_Cruising.h"
+#include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+#include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 
 OBA_Cruising::OBA_Cruising() {
 
@@ -10,6 +12,8 @@ OBA_Cruising::OBA_Cruising() {
 }
 
 void OBA_Cruising::activateCruising() {
+	OBA_SHAFT_Interface::getCurrentSpeed();
+	OBA_THRO_Interface::sendThrottleSignal(40);
 
 }
 

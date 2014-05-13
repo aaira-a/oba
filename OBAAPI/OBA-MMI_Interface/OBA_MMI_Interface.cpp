@@ -2,6 +2,7 @@
 #include "../../OBAKERNEL/PortsLayout.h"
 #include "OBA_MMI_Interface.h"
 #include "../OBA-THRO_Interface/OBA_THRO_Interface.h"
+#include "../../OBACruise/OBA_Cruising.h"
 
 OBA_MMI_Interface::OBA_MMI_Interface() {
 
@@ -70,7 +71,7 @@ void OBA_MMI_Interface::keyPressHandler(int pressedKey) {
 	switch (keyEnum) {
 
 	case KEY_ACTIVATION:
-		OBA_THRO_Interface::sendThrottleSignal(40);
+		OBA_Cruising::activateCruising();
 		break;
 
 	default :
