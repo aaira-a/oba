@@ -36,14 +36,24 @@ OBA_MMI_Interface::OBA_MMI_Interface() {
 		KEY_DECIMAL
 	};
 
-void MMI::sendLEDsignal() {
+void MMI::sendLEDsignal(int ledNumber, bool ledBool) {
+	
 	LedCommandWord *led;
 	led =  (LedCommandWord *)(OTM::ledCommandByteAddress);
 
 	//assign/override accordingly
-	led->led_1=1;   //left   // green
-	led->led_2=1;   //center // yellow
-	led->led_3=1;   //right  // red
+	if (ledNumber == 1) {
+		led -> led_1 = ledBool;	//left   // green	// on/off
+	}
+
+	if (ledNumber == 2) {
+		led -> led_2 = ledBool;	//center // yellow	// care to speed
+	}
+
+	if (ledNumber == 2) {
+		led -> led_3 = ledBool;	//right  // red		// hazard bolting
+	}
+
 }
 
 void MMI::displayMessage() {
