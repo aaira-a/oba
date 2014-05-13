@@ -36,7 +36,7 @@ OBA_MMI_Interface::OBA_MMI_Interface() {
 		KEY_DECIMAL
 	};
 
-void OBA_MMI_Interface::sendLEDsignal() {
+void MMI::sendLEDsignal() {
 	LedCommandWord *led;
 	led =  (LedCommandWord *)(OTM::ledCommandByteAddress);
 
@@ -46,7 +46,7 @@ void OBA_MMI_Interface::sendLEDsignal() {
 	led->led_3=1;   //right  // red
 }
 
-void OBA_MMI_Interface::displayMessage() {
+void MMI::displayMessage() {
 	static  char *msg;
 	static	char msg1[] = "Hello World!             ";
 	DisplayBufferAddress	 *display;
@@ -64,9 +64,9 @@ void OBA_MMI_Interface::displayMessage() {
 //static	char msg4[] = "                         ";
 
 
-void OBA_MMI_Interface::keyPressHandler(int pressedKey) {
+void MMI::keyPressHandler(int pressedKey) {
 
-	KEYMAP keyEnum = static_cast<OBA_MMI_Interface::KEYMAP>(pressedKey);
+	KEYMAP keyEnum = static_cast<MMI::KEYMAP>(pressedKey);
 
 	switch (keyEnum) {
 

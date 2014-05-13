@@ -10,4 +10,6 @@ class OBA_MMI_Interface {
 		static void keyPressHandler(int pressedKey);
 };
 
+typedef OBA_MMI_Interface	MMI;
+
 #endif
