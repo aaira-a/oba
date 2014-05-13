@@ -21,14 +21,13 @@ unsigned x = 0;
 
 void myInterruptHandler (Interrupt sig) {
 	
-	ControlPanelInterruptStatusWord *keyId;
+	ControlPanelInterruptStatusWord *keyId = (ControlPanelInterruptStatusWord *) (OTM::controlPanelInterruptWordAddress);
 	OBA_MMI_Interface::KEYMAP pressedKey;
 	DrivingStationInterruptStatusWord *eventDSTA = (DrivingStationInterruptStatusWord *) (OTM::drivingControlsInterruptWordAddress);
 
 	switch (sig)
 	{
 	case IT_controlPanel : 
-		keyId = (ControlPanelInterruptStatusWord *) (OTM::controlPanelInterruptWordAddress);
 		
 		pressedKey = static_cast<OBA_MMI_Interface::KEYMAP>(keyId->keyCode);
 
