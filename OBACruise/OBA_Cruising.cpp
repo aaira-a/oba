@@ -4,6 +4,7 @@
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
+#include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 
 OBA_Cruising::OBA_Cruising() {
 
@@ -16,7 +17,8 @@ void OBA_Cruising::activateCruising() {
 	
 	if (validateCruisingRequest()) {
 		//OBA_THRO_Interface::maintainSpeed();
-		OBA_THRO_Interface::sendThrottleSignal(77);
+		THRO::sendThrottleSignal(77);
+		MMI::sendLEDsignal(1, 1);
 	}
 
 }

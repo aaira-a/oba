@@ -92,7 +92,7 @@ try {
 
  for (;;)
 	{
-		OBA_MMI_Interface::sendLEDsignal();
+		//OBA_MMI_Interface::sendLEDsignal();
 
 // write the message to the display
 
