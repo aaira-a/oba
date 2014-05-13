@@ -9,4 +9,6 @@ class OBA_THRO_Interface {
 		static bool getOddParityBit(unsigned int x);
 };
 
+typedef OBA_THRO_Interface	THRO;
+
 #endif
