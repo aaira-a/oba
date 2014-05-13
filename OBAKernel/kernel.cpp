@@ -34,10 +34,12 @@ void myInterruptHandler (Interrupt sig) {
 
 	case IT_drivingControls :
 	
+		/*
 		cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
 		"\nbrake: " << eventDSTA->brakeFlag <<
 		"\nclutch:" << eventDSTA->clutchFlag <<
 		"\nignition:" << eventDSTA-> ignitionFlag;
+		*/
 
 		//cout << "IT driving" <<endl;
 		//msg = msg3; temp = 10;
@@ -99,8 +101,8 @@ try {
 
 			//OTM::idleWait (75);
 
-			OBA_THRO_Interface::sendThrottleSignal();
-			//cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
+			OBA_THRO_Interface::sendThrottleSignal(40);
+			cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
 
 	}
    }
