@@ -11,4 +11,6 @@ class OBA_DSTA_Interface {
 		static bool getAcceleratorState();
 };
 
+typedef OBA_DSTA_Interface	DSTA;
+
 #endif
