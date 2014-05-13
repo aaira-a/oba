@@ -29,5 +29,14 @@ bool THRO::getOddParityBit(unsigned int x) {
 }
 
 void THRO::maintainSpeed(int speed) {
-	THRO::sendThrottleSignal(77);
+	
+	//pseudo
+	// 1 - get current speed
+	// 2 - get current throttle voltage
+	// 3 - adjust accordingly??
+	// 4 - maybe start by getting the last voltage (for new, can be from user), old, can put an internal vold var
+	// 5 - ++ or -- accordingly
+	// 6 - infinity & beyond?
+
+	THRO::sendThrottleSignal(77);  // placeholder ofc
 }
