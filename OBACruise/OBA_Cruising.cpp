@@ -16,8 +16,7 @@ void OBA_Cruising::activateCruising() {
 	
 	if (validateCruisingRequest()) {
 		//OBA_THRO_Interface::maintainSpeed();
-
-
+		OBA_THRO_Interface::sendThrottleSignal(77);
 	}
 
 }
@@ -36,11 +35,21 @@ void OBA_Cruising::resumeCruising() {
 
 bool OBA_Cruising::validateCruisingRequest() {
 	
-	if ( /*add !calib::isCalibrating()?*/ DSTA::getIgnitionState() && !DSTA::getBrakeState() && !DSTA::getClutchState()) {
-		//if (OBA_SHAFT_Interface::getCurrentSpeed() >= 80 && OBA_SHAFT_Interface::getCurrentSpeed() <= 130) {
-		OBA_THRO_Interface::sendThrottleSignal(40);
-		return true;
+	if (/*add !calib::isCalibrating()?*/ 
+		DSTA::getIgnitionState() && 
+		!DSTA::getBrakeState() && 
+		!DSTA::getClutchState() &&
+		DSTA::getEngagedGearState()==5) {
+
+			if (SHAFT::getCurrentSpeed() >= 80 && 
+				SHAFT::getCurrentSpeed() <= 130) {
+				return true;
+			}
+			
+			else return false;
 	}
+
+	else return false;
 }
 
 void OBA_Cruising::requestCurrentSpeed() {  			// delegate call to shaft ? or move method to shaft ?
