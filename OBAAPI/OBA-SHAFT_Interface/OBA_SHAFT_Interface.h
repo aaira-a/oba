@@ -8,4 +8,6 @@ class OBA_SHAFT_Interface {
 		static double getCurrentSpeed();
 };
 
+typedef OBA_SHAFT_Interface		SHAFT;
+
 #endif
