@@ -3,6 +3,7 @@
 #include "OBA_Cruising.h"
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
+#include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
 
 OBA_Cruising::OBA_Cruising() {
 
@@ -12,8 +13,12 @@ OBA_Cruising::OBA_Cruising() {
 }
 
 void OBA_Cruising::activateCruising() {
-	OBA_SHAFT_Interface::getCurrentSpeed();
-	OBA_THRO_Interface::sendThrottleSignal(40);
+	
+	if (validateCruisingRequest()) {
+		//OBA_THRO_Interface::maintainSpeed();
+
+
+	}
 
 }
 
@@ -29,8 +34,13 @@ void OBA_Cruising::resumeCruising() {
 
 }
 
-void OBA_Cruising::validateCruisingRequest() {
-
+bool OBA_Cruising::validateCruisingRequest() {
+	
+	if ( /*add !calib::isCalibrating()?*/ DSTA::getIgnitionState() && !DSTA::getBrakeState() && !DSTA::getClutchState()) {
+		//if (OBA_SHAFT_Interface::getCurrentSpeed() >= 80 && OBA_SHAFT_Interface::getCurrentSpeed() <= 130) {
+		OBA_THRO_Interface::sendThrottleSignal(40);
+		return true;
+	}
 }
 
 void OBA_Cruising::requestCurrentSpeed() {  			// delegate call to shaft ? or move method to shaft ?
@@ -50,7 +60,7 @@ void OBA_Cruising::requestDrivingStationStatus() { 	// delegate call to dsta ? o
 }	
 
 void OBA_Cruising::requestMaintainSpeed() {			// delegate call to thro? or maintain logic here ?
-
+// start with activate cruising to handle first
 }	
 
 void OBA_Cruising::requestStopMaintainSpeed() {		// delegate call to thro? or maintain logic here ?
