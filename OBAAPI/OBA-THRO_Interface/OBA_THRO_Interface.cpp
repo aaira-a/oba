@@ -27,3 +27,7 @@ bool THRO::getOddParityBit(unsigned int x) {
 	x = ((x >>  16 ) + x);
 	return !(x&0x01); //return odd parity bit
 }
+
+void THRO::maintainSpeed(int speed) {
+
+}
