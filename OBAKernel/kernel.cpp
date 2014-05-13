@@ -63,6 +63,8 @@ void myInterruptHandler (Interrupt sig) {
 			"\naccelerator: " << OBA_DSTA_Interface::getAcceleratorState();
 			*/
 
+			SHAFT::calculateSpeed();
+
 			cout << "\n\ncruise isActive : " << CRUISE::FisActive() <<
 					"  \ncruise cruisingSpeed : " << CRUISE::FcruisingSpeed() <<
 					"  \ncruise isSuspended : " << CRUISE::FisSuspended() << endl;

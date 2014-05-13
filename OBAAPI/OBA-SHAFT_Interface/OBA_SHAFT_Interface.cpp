@@ -7,8 +7,14 @@ OBA_SHAFT_Interface::OBA_SHAFT_Interface() {
 }
 
 double calibrationconst = 5291.0053;
-unsigned int lastpulse = 0;
-double speed = 0;
+static unsigned int lastpulse = 0;
+static double speed = 0;
+
+void  SHAFT::calculateSpeed() {
+	speed = ((getCurrentPulse() - lastpulse)/calibrationconst)*3600;
+	lastpulse = getCurrentPulse();
+	//cout << speed << " : " << getCurrentPulse()/calibrationconst << endl;
+}
 
 unsigned int SHAFT::getCurrentPulse() {
 	CounterWord *pulse;
@@ -18,9 +24,5 @@ unsigned int SHAFT::getCurrentPulse() {
 }
 
 double SHAFT::getCurrentSpeed() {
-	
-	speed = ((getCurrentPulse() - lastpulse)/calibrationconst)*3600;
-	lastpulse = getCurrentPulse();
-	//cout << speed << " : " << getCurrentPulse()/calibrationconst << endl;
 	return speed;
 }
