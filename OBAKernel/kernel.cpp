@@ -23,7 +23,7 @@ void myInterruptHandler (Interrupt sig) {
 	
 	ControlPanelInterruptStatusWord *keyId;
 	OBA_MMI_Interface::KEYMAP pressedKey;
-	DrivingStationInterruptStatusWord *eventDSTA;
+	DrivingStationInterruptStatusWord *eventDSTA = (DrivingStationInterruptStatusWord *) (OTM::drivingControlsInterruptWordAddress);
 
 	switch (sig)
 	{
@@ -37,8 +37,7 @@ void myInterruptHandler (Interrupt sig) {
 		break;
 
 	case IT_drivingControls :
-		eventDSTA = (DrivingStationInterruptStatusWord *) (OTM::drivingControlsInterruptWordAddress);
-
+	
 		cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
 		"\nbrake: " << eventDSTA->brakeFlag <<
 		"\nclutch:" << eventDSTA->clutchFlag <<
