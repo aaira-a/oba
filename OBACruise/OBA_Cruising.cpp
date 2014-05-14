@@ -20,6 +20,7 @@ void CRUISE::activateCruising() {
 		isActive = 1;
 		THRO::maintainSpeed(cruisingSpeed);
 		MMI::sendLEDsignal(1, 1);
+		MMI::displayMessage(cruisingSpeed);
 	}
 
 }

@@ -68,6 +68,19 @@ void MMI::displayMessage(char message[]) {
 		display->displaymessage[i]=msg[i];
 }
 
+
+void MMI::displayMessage(int speed) {
+	static  char *msg;
+	static  char cruiseActivated[] = "Auto Cruise xxx km/h      ";
+	DisplayBufferAddress	 *display;
+	display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
+
+	msg=cruiseActivated;
+
+	for (int i=0;i<20;i++)
+		display->displaymessage[i]=msg[i];
+}
+
 //unused char arrays from eg
 //static	char msg2[] = "Keyboard Pressed         ";
 //static	char msg3[] = "Driving Control          ";

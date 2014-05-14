@@ -16,7 +16,6 @@ unsigned x = 0;
 #include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
 #include "../OBACruise/OBA_Cruising.h"
 
-char msgx[] = "Keyboard Pressed         ";
 
 void myInterruptHandler (Interrupt sig) {
 	
@@ -106,7 +105,6 @@ try {
 // write the message to the display
 
 
-		OBA_MMI_Interface::displayMessage(msgx);
 
 // idle the CPU		
 
