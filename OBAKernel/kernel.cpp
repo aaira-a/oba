@@ -66,9 +66,12 @@ void myInterruptHandler (Interrupt sig) {
 
 			SHAFT::calculateSpeed();
 
-			cout << "\n\ncruise isActive : " << CRUISE::FisActive() <<
+			/*cout << "\n\ncruise isActive : " << CRUISE::FisActive() <<
 					"  \ncruise cruisingSpeed : " << CRUISE::getCruisingSpeed() <<
-					"  \ncruise isSuspended : " << CRUISE::FisSuspended() << endl;
+					"  \ncruise isSuspended : " << CRUISE::FisSuspended() << endl;*/
+
+			/*cout << "\n\nthrottle signal   : 40" << 
+					"\nthrottle response : " << THRO::getThrottleResponse() << endl;*/
 
 		break;
 	default :
@@ -110,8 +113,7 @@ try {
 
 			//OTM::idleWait (75);
 
-			//OBA_THRO_Interface::sendThrottleSignal(40);
-			//cout << OBA_THRO_Interface::getThrottleResponse() <<endl;
+			//THRO::sendThrottleSignal(40); 
 	}
    }
 
