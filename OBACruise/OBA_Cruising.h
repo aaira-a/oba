@@ -19,7 +19,7 @@ class OBA_Cruising {
 
 		static bool FisActive();
 		static bool FisSuspended(); 
-		static int FcruisingSpeed();
+		static int getCruisingSpeed();
 
 };
 

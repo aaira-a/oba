@@ -67,7 +67,7 @@ void myInterruptHandler (Interrupt sig) {
 			SHAFT::calculateSpeed();
 
 			cout << "\n\ncruise isActive : " << CRUISE::FisActive() <<
-					"  \ncruise cruisingSpeed : " << CRUISE::FcruisingSpeed() <<
+					"  \ncruise cruisingSpeed : " << CRUISE::getCruisingSpeed() <<
 					"  \ncruise isSuspended : " << CRUISE::FisSuspended() << endl;
 
 		break;

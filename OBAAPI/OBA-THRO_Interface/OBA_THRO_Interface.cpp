@@ -1,6 +1,8 @@
 #include "../../OBAKERNEL/OBATargetMachine.h"
 #include "../../OBAKERNEL/PortsLayout.h"
 #include "OBA_THRO_Interface.h"
+#include "../OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+#include "../../OBACruise/OBA_Cruising.h"
 
 OBA_THRO_Interface::OBA_THRO_Interface() {
 
@@ -41,6 +43,9 @@ void THRO::maintainSpeed(int speed) {
 	// 4 - maybe start by getting the last voltage (for new, can be from user), old, can put an internal vold var
 	// 5 - ++ or -- accordingly
 	// 6 - infinity & beyond?
+
+	//SHAFT::getCurrentSpeed();
+	//CRUISE::getCruisingSpeed();
 
 	THRO::sendThrottleSignal(77);  // placeholder ofc
 }

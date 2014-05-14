@@ -97,6 +97,6 @@ bool CRUISE::FisSuspended() {
 	return isSuspended;
 }
 
-int CRUISE::FcruisingSpeed() {
+int CRUISE::getCruisingSpeed() {
 	return cruisingSpeed;
 }
