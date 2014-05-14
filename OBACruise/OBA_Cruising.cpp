@@ -25,19 +25,19 @@ void CRUISE::activateCruising() {
 
 }
 
-void OBA_Cruising::stopCruising() {
+void CRUISE::stopCruising() {
 
 }
 
-void OBA_Cruising::suspendCruising() {
+void CRUISE::suspendCruising() {
 
 }
 
-void OBA_Cruising::resumeCruising() {
+void CRUISE::resumeCruising() {
 
 }
 
-bool OBA_Cruising::validateCruisingRequest() {
+bool CRUISE::validateCruisingRequest() {
 	
 	if (/*add !calib::isCalibrating()?*/ 
 		DSTA::getIgnitionState() && 
@@ -56,27 +56,27 @@ bool OBA_Cruising::validateCruisingRequest() {
 	else return false;
 }
 
-void OBA_Cruising::requestCurrentSpeed() {  			// delegate call to shaft ? or move method to shaft ?
+void CRUISE::requestCurrentSpeed() {  			// delegate call to shaft ? or move method to shaft ?
 
 }   
 
-void OBA_Cruising::setCruisingSpeed() {
+void CRUISE::setCruisingSpeed() {
 
 }
 
-void OBA_Cruising::requestCalibrationStatus() {		// delegate call to calibration controller ? or move method to calibration ?
+void CRUISE::requestCalibrationStatus() {		// delegate call to calibration controller ? or move method to calibration ?
 
 }	
 
-void OBA_Cruising::requestDrivingStationStatus() { 	// delegate call to dsta ? or move method to dsta?
+void CRUISE::requestDrivingStationStatus() { 	// delegate call to dsta ? or move method to dsta?
 
 }	
 
-void OBA_Cruising::requestMaintainSpeed() {			// delegate call to thro? or maintain logic here ?
+void CRUISE::requestMaintainSpeed() {			// delegate call to thro? or maintain logic here ?
 // start with activate cruising to handle first
 }	
 
-void OBA_Cruising::requestStopMaintainSpeed() {		// delegate call to thro? or maintain logic here ?
+void CRUISE::requestStopMaintainSpeed() {		// delegate call to thro? or maintain logic here ?
 
 }
 
