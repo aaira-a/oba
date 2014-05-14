@@ -56,13 +56,13 @@ void MMI::sendLEDsignal(int ledNumber, bool ledBool) {
 
 }
 
-void MMI::displayMessage() {
+void MMI::displayMessage(char message[]) {
 	static  char *msg;
-	static	char msg1[] = "Hello World!             ";
+	//static	char msg1[] = "Hello World!             ";
 	DisplayBufferAddress	 *display;
 	display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
 
-	msg=msg1;
+	msg=message;
 
 	for (int i=0;i<20;i++)
 		display->displaymessage[i]=msg[i];
