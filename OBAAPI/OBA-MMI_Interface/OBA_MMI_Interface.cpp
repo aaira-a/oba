@@ -77,9 +77,10 @@ void MMI::displayMessage(int speed) {
 	display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
 
 	std::string str1 = "Auto Cruise " + std::to_string(static_cast<long long>(speed));
-  	char * cstr = new char [str1.length()+1];
-  	std::strcpy (cstr, str1.c_str());
+	std::string str2 = str1 + " km/h ";
 
+  	char * cstr = new char [str2.length()+1];
+  	std::strcpy (cstr, str2.c_str());
 	static  char *msg;
 	msg=cstr;
 
