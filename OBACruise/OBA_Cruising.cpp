@@ -19,9 +19,9 @@ void CRUISE::activateCruising() {
 		cruisingSpeed = SHAFT::getCurrentSpeed();
 		isActive = 1;
 		isSuspended = 0;
-		THRO::maintainSpeed(cruisingSpeed);
 		MMI::sendLEDsignal(1, 1);
 		MMI::displayMessage(cruisingSpeed);
+		THRO::maintainSpeed(cruisingSpeed);
 	}
 
 }

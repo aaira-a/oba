@@ -34,7 +34,7 @@ bool THRO::getOddParityBit(unsigned int x) {
 }
 
 
-void THRO::maintainSpeed(int speed) {
+void THRO::maintainSpeed(int cruisingSpeed) {
 	
 	//pseudo
 	// 1 - get current speed
@@ -44,8 +44,16 @@ void THRO::maintainSpeed(int speed) {
 	// 5 - ++ or -- accordingly
 	// 6 - infinity & beyond?
 
-	//SHAFT::getCurrentSpeed();
-	//CRUISE::getCruisingSpeed();
+	static unsigned int throttleCounter = getThrottleResponse();
 
-	THRO::sendThrottleSignal(77);  // placeholder ofc
+	for (;;) {
+
+		if (SHAFT::getCurrentSpeed() < cruisingSpeed) {
+			sendThrottleSignal(throttleCounter++);
+		}
+
+		if (SHAFT::getCurrentSpeed() > cruisingSpeed) {
+			sendThrottleSignal(throttleCounter--);
+		}
+	}
 }
