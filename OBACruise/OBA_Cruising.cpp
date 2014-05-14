@@ -18,6 +18,7 @@ void CRUISE::activateCruising() {
 	if (validateCruisingRequest()) {
 		cruisingSpeed = SHAFT::getCurrentSpeed();
 		isActive = 1;
+		isSuspended = 0;
 		THRO::maintainSpeed(cruisingSpeed);
 		MMI::sendLEDsignal(1, 1);
 		MMI::displayMessage(cruisingSpeed);
@@ -26,6 +27,14 @@ void CRUISE::activateCruising() {
 }
 
 void CRUISE::stopCruising() {
+	if (isActive == 1) {
+		isActive = 0;
+		isSuspended = 0;
+		cruisingSpeed = 0;
+		//thro back off - not defined yet
+		MMI::sendLEDsignal(1, 0);
+		MMI::displayMessage("AC Deactivated            ");
+	}
 
 }
 

@@ -98,7 +98,11 @@ void MMI::keyPressHandler(int pressedKey) {
 	switch (keyEnum) {
 
 	case KEY_ACTIVATION:
-		OBA_Cruising::activateCruising();
+		CRUISE::activateCruising();
+		break;
+
+	case KEY_DEACTIVATION:
+		CRUISE::stopCruising();
 		break;
 
 	default :
