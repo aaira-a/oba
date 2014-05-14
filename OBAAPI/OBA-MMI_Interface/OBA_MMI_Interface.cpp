@@ -3,6 +3,8 @@
 #include "OBA_MMI_Interface.h"
 #include "../OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../../OBACruise/OBA_Cruising.h"
+#include <string>
+#include <cstring>
 
 OBA_MMI_Interface::OBA_MMI_Interface() {
 
@@ -70,12 +72,16 @@ void MMI::displayMessage(char message[]) {
 
 
 void MMI::displayMessage(int speed) {
-	static  char *msg;
-	static  char cruiseActivated[] = "Auto Cruise xxx km/h      ";
+	
 	DisplayBufferAddress	 *display;
 	display =  (DisplayBufferAddress*)(OTM::displayBufferAddress);
 
-	msg=cruiseActivated;
+	std::string str1 = "Auto Cruise " + std::to_string(static_cast<long long>(speed));
+  	char * cstr = new char [str1.length()+1];
+  	std::strcpy (cstr, str1.c_str());
+
+	static  char *msg;
+	msg=cstr;
 
 	for (int i=0;i<20;i++)
 		display->displaymessage[i]=msg[i];
