@@ -13,20 +13,24 @@ unsigned int DSTA::getEngagedGearState() {
 	return state->engagedGear;
 }
 
+
 bool DSTA::getIgnitionState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->ignitionState;
 }
+
 
 bool DSTA::getClutchState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->clutchState;
 }
 
+
 bool DSTA::getBrakeState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->brakeState;
 }
+
 
 bool DSTA::getAcceleratorState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);

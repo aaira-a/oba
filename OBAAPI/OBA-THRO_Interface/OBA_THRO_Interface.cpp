@@ -6,6 +6,7 @@ OBA_THRO_Interface::OBA_THRO_Interface() {
 
 }
 
+
 void THRO::sendThrottleSignal(unsigned int voltage) {
 	ThrottleCommandWord *throttle;
 	throttle = (ThrottleCommandWord *)(OTM::throttleCommandWordAddress);
@@ -13,11 +14,13 @@ void THRO::sendThrottleSignal(unsigned int voltage) {
 	throttle -> paritybit = getOddParityBit(voltage);
 }
 
+
 unsigned int THRO::getThrottleResponse() {
 	ThrottleResponseWord *throttle;
 	throttle = (ThrottleResponseWord *)(OTM::throttlePositionWordAddress);
 	return throttle->inputvoltagevalue;
 }
+
 
 bool THRO::getOddParityBit(unsigned int x) {
 	x = ((x >> 1) & 0x55555555) + (x & 0x55555555);
@@ -27,6 +30,7 @@ bool THRO::getOddParityBit(unsigned int x) {
 	x = ((x >>  16 ) + x);
 	return !(x&0x01); //return odd parity bit
 }
+
 
 void THRO::maintainSpeed(int speed) {
 	

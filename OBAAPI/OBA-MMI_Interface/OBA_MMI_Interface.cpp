@@ -38,6 +38,7 @@ OBA_MMI_Interface::OBA_MMI_Interface() {
 		KEY_DECIMAL
 	};
 
+
 void MMI::sendLEDsignal(int ledNumber, bool ledBool) {
 	
 	LedCommandWord *led;
@@ -57,6 +58,7 @@ void MMI::sendLEDsignal(int ledNumber, bool ledBool) {
 	}
 
 }
+
 
 void MMI::displayMessage(char message[]) {
 	static  char *msg;
@@ -87,11 +89,6 @@ void MMI::displayMessage(int speed) {
 	for (int i=0;i<20;i++)
 		display->displaymessage[i]=msg[i];
 }
-
-//unused char arrays from eg
-//static	char msg2[] = "Keyboard Pressed         ";
-//static	char msg3[] = "Driving Control          ";
-//static	char msg4[] = "                         ";
 
 
 void MMI::keyPressHandler(int pressedKey) {
