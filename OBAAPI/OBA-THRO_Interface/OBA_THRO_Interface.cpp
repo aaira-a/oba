@@ -7,7 +7,7 @@
 OBA_THRO_Interface::OBA_THRO_Interface() {
 
 }
-	static unsigned int throttleCounter = 0;
+	//static unsigned int throttleCounter = 0;
 	static bool isMaintaining = 0;
 	static unsigned int speedToMaintain = 0;
 
@@ -39,17 +39,17 @@ bool THRO::getOddParityBit(unsigned int x) {
 void THRO::setMaintainSpeed(int speed) {
 		isMaintaining = 1;
 		speedToMaintain = speed;
-		throttleCounter = getThrottleResponse();
+		//throttleCounter = getThrottleResponse();
 }
 
 void THRO::maintainSpeed() {
-	
+
 		if (SHAFT::getCurrentSpeed() < speedToMaintain) {
-			sendThrottleSignal(throttleCounter++);
+			sendThrottleSignal(80);
 		}
 
 		if (SHAFT::getCurrentSpeed() > speedToMaintain) {
-			sendThrottleSignal(throttleCounter--);
+			sendThrottleSignal(40);
 		}
 	
 }

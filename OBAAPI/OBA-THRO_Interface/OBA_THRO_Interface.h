@@ -7,7 +7,8 @@ class OBA_THRO_Interface {
 		static void sendThrottleSignal(unsigned int voltage);
 		static unsigned int getThrottleResponse();
 		static bool getOddParityBit(unsigned int x);
-		static void maintainSpeed(int speed);
+		static void setMaintainSpeed(int speed);
+		static void maintainSpeed();
 };
 
 typedef OBA_THRO_Interface	THRO;
