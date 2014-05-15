@@ -39,7 +39,12 @@ bool THRO::getOddParityBit(unsigned int x) {
 void THRO::setMaintainSpeed(int speed) {
 		isMaintaining = 1;
 		speedToMaintain = speed;
-		//throttleCounter = getThrottleResponse();
+
+		if (speed == 0) {
+			isMaintaining = 0;
+			speedToMaintain = 0;
+			sendThrottleSignal(0);
+		}
 }
 
 void THRO::maintainSpeed() {
