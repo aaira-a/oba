@@ -21,7 +21,7 @@ void CRUISE::activateCruising() {
 		isSuspended = 0;
 		MMI::sendLEDsignal(1, 1);
 		MMI::displayMessage(cruisingSpeed);
-		THRO::maintainSpeed(cruisingSpeed);
+		THRO::setMaintainSpeed(cruisingSpeed);
 	}
 
 }
@@ -89,7 +89,7 @@ void CRUISE::requestStopMaintainSpeed() {		// delegate call to thro? or maintain
 
 }
 
-bool CRUISE::FisActive() {
+bool CRUISE::getIsActive() {
 	return isActive;
 }
 

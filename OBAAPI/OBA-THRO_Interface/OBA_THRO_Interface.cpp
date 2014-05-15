@@ -7,7 +7,9 @@
 OBA_THRO_Interface::OBA_THRO_Interface() {
 
 }
-
+	static unsigned int throttleCounter = 0;
+	static bool isMaintaining = 0;
+	static unsigned int speedToMaintain = 0;
 
 void THRO::sendThrottleSignal(unsigned int voltage) {
 	ThrottleCommandWord *throttle;
@@ -34,26 +36,20 @@ bool THRO::getOddParityBit(unsigned int x) {
 }
 
 
-void THRO::maintainSpeed(int cruisingSpeed) {
+void THRO::setMaintainSpeed(int speed) {
+		isMaintaining = 1;
+		speedToMaintain = speed;
+		throttleCounter = getThrottleResponse();
+}
+
+void THRO::maintainSpeed() {
 	
-	//pseudo
-	// 1 - get current speed
-	// 2 - get current throttle voltage
-	// 3 - adjust accordingly??
-	// 4 - maybe start by getting the last voltage (for new, can be from user), old, can put an internal vold var
-	// 5 - ++ or -- accordingly
-	// 6 - infinity & beyond?
-
-	static unsigned int throttleCounter = getThrottleResponse();
-
-	for (;;) {
-
-		if (SHAFT::getCurrentSpeed() < cruisingSpeed) {
+		if (SHAFT::getCurrentSpeed() < speedToMaintain) {
 			sendThrottleSignal(throttleCounter++);
 		}
 
-		if (SHAFT::getCurrentSpeed() > cruisingSpeed) {
+		if (SHAFT::getCurrentSpeed() > speedToMaintain) {
 			sendThrottleSignal(throttleCounter--);
 		}
-	}
+	
 }
