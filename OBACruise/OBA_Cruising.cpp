@@ -50,8 +50,11 @@ void CRUISE::startAccelerationRequest() {
 }
 
 void CRUISE::suspendCruising() {
+	if (isActive) {
 		isSuspended = 1;
 		THRO::setMaintainSpeed(0);
+		MMI::displayMessage("AC Suspended              ");
+	}
 }
 
 void CRUISE::stopAccelerationRequest() {

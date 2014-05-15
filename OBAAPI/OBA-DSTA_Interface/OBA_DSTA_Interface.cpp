@@ -1,6 +1,7 @@
 #include "../../OBAKERNEL/OBATargetMachine.h"
 #include "../../OBAKERNEL/PortsLayout.h"
 #include "OBA_DSTA_Interface.h"
+#include "../../OBACruise/OBA_Cruising.h"
 
 OBA_DSTA_Interface::OBA_DSTA_Interface() {
 
@@ -35,4 +36,21 @@ bool DSTA::getBrakeState() {
 bool DSTA::getAcceleratorState() {
 	state =  (DrivinStationStateWord *) (OTM::drivingControlsStateWordAddress);
 	return state->acceleratorState;
+}
+
+
+void DSTA::handleDSTAinterrupt(DrivingStationInterruptStatusWord *whatChanged) {
+	whatChanged = (DrivingStationInterruptStatusWord *) (OTM::drivingControlsInterruptWordAddress);
+
+
+		if (whatChanged->brakeFlag || whatChanged->clutchFlag) {
+			CRUISE::suspendCruising();
+		}
+
+		/*	cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
+		"\nbrake: " << eventDSTA->brakeFlag <<
+		"\nclutch:" << eventDSTA->clutchFlag <<
+		"\nignition:" << eventDSTA-> ignitionFlag;
+		*/
+
 }

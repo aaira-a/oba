@@ -9,6 +9,7 @@ class OBA_DSTA_Interface {
 		static bool getClutchState();
 		static bool getBrakeState();
 		static bool getAcceleratorState();
+		static void handleDSTAinterrupt(DrivingStationInterruptStatusWord*);
 };
 
 typedef OBA_DSTA_Interface	DSTA;

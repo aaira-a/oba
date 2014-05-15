@@ -36,6 +36,7 @@ void myInterruptHandler (Interrupt sig) {
 
 	case IT_drivingControls :
 	
+		DSTA::handleDSTAinterrupt(eventDSTA);
 		/*
 		cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
 		"\nbrake: " << eventDSTA->brakeFlag <<
