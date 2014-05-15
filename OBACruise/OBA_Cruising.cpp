@@ -12,6 +12,7 @@ OBA_Cruising::OBA_Cruising() {
 	static bool isActive = 		0;
 	static bool isSuspended = 	0;
 	static int cruisingSpeed = 	0;
+	static bool isAccelerating = 0;
 
 void CRUISE::activateCruising() {
 	
@@ -20,6 +21,7 @@ void CRUISE::activateCruising() {
 		THRO::setMaintainSpeed(cruisingSpeed);
 		isActive = 1;
 		isSuspended = 0;
+		isAccelerating = 0;
 		MMI::sendLEDsignal(1, 1);
 		MMI::displayMessage(cruisingSpeed);
 	}
@@ -27,7 +29,7 @@ void CRUISE::activateCruising() {
 }
 
 void CRUISE::stopCruising() {
-	if (isActive == 1) {
+	if (isActive) {
 		THRO::setMaintainSpeed(0);
 		cruisingSpeed = 0;
 		isActive = 0;
@@ -38,8 +40,9 @@ void CRUISE::stopCruising() {
 
 }
 
-void CRUISE::accelerationRequest() {
-	if (isActive == 1 && isSuspended == 0) {
+void CRUISE::startAccelerationRequest() {
+	if (isActive && !isSuspended) {
+		isAccelerating = 1;
 		suspendCruising();
 		THRO::setMaintainSpeed(130); // hardcode first
 		MMI::displayMessage("Accelerating              ");
@@ -49,6 +52,13 @@ void CRUISE::accelerationRequest() {
 void CRUISE::suspendCruising() {
 		isSuspended = 1;
 		THRO::setMaintainSpeed(0);
+}
+
+void CRUISE::stopAccelerationRequest() {
+		if (isAccelerating) {
+		isAccelerating = 0;
+		activateCruising();
+		}
 }
 
 void CRUISE::resumeCruising() {
