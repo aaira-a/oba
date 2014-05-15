@@ -55,7 +55,7 @@ void CRUISE::suspendCruising() {
 }
 
 void CRUISE::stopAccelerationRequest() {
-		if (isAccelerating) {
+		if (isActive) {
 		isAccelerating = 0;
 		activateCruising();
 		}
