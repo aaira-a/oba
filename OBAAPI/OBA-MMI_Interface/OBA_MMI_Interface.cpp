@@ -105,6 +105,10 @@ void MMI::keyPressHandler(int pressedKey) {
 		CRUISE::stopCruising();
 		break;
 
+	case KEY_START_ACCELERATION:
+		//callsomething;
+		break;
+		
 	default :
 		break;
 	}
