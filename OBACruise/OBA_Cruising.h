@@ -5,13 +5,14 @@ class OBA_Cruising {
 	public:
 		OBA_Cruising();
 
-		static void activateCruising();
+		static void activateCruising(int ifZeroisForResume);
 		static void stopCruising();
 		static void startAccelerationRequest();
 		static void stopAccelerationRequest();
 		static void suspendCruising();
 		static void resumeCruising();
 		static bool validateCruisingRequest();
+
 		static void requestCurrentSpeed();     		// delegate call to shaft ? or move method to shaft ?
 		static void setCruisingSpeed();
 		static void requestCalibrationStatus();		// delegate call to calibration controller ? or move method to calibration ?

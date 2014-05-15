@@ -14,10 +14,14 @@ OBA_Cruising::OBA_Cruising() {
 	static int cruisingSpeed = 	0;
 	static bool isAccelerating = 0;
 
-void CRUISE::activateCruising() {
+void CRUISE::activateCruising(int ifZeroisForResume) {
 	
 	if (validateCruisingRequest()) {
-		cruisingSpeed = SHAFT::getCurrentSpeed();
+
+		if (ifZeroisForResume) {
+			cruisingSpeed = SHAFT::getCurrentSpeed();
+		}
+
 		THRO::setMaintainSpeed(cruisingSpeed);
 		isActive = 1;
 		isSuspended = 0;
@@ -58,13 +62,16 @@ void CRUISE::suspendCruising() {
 }
 
 void CRUISE::stopAccelerationRequest() {
-		if (isActive) {
+	if (isActive) {
 		isAccelerating = 0;
-		activateCruising();
+		activateCruising(101);
 		}
 }
 
 void CRUISE::resumeCruising() {
+	if (validateCruisingRequest) {
+		activateCruising(0);
+	}
 
 }
 

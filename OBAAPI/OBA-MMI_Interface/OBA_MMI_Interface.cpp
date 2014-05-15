@@ -98,7 +98,7 @@ void MMI::keyPressHandler(int pressedKey) {
 	switch (keyEnum) {
 
 	case KEY_ACTIVATION:
-		CRUISE::activateCruising();
+		CRUISE::activateCruising(101);
 		break;
 
 	case KEY_DEACTIVATION:
@@ -111,6 +111,10 @@ void MMI::keyPressHandler(int pressedKey) {
 
 	case KEY_STOP_ACCELERATION:
 		CRUISE::stopAccelerationRequest();
+		break;
+
+	case KEY_RESUME:
+		CRUISE::resumeCruising();
 		break;
 
 	default :
