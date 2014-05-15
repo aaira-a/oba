@@ -38,8 +38,17 @@ void CRUISE::stopCruising() {
 
 }
 
-void CRUISE::suspendCruising() {
+void CRUISE::accelerationRequest() {
+	if (isActive == 1 && isSuspended == 0) {
+		suspendCruising();
+		THRO::setMaintainSpeed(130); // hardcode first
+		MMI::displayMessage("Accelerating              ");
+	}
+}
 
+void CRUISE::suspendCruising() {
+		isSuspended = 1;
+		THRO::setMaintainSpeed(0);
 }
 
 void CRUISE::resumeCruising() {

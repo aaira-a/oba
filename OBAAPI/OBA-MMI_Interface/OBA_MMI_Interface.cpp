@@ -106,9 +106,9 @@ void MMI::keyPressHandler(int pressedKey) {
 		break;
 
 	case KEY_START_ACCELERATION:
-		//callsomething;
+		CRUISE::accelerationRequest();
 		break;
-		
+
 	default :
 		break;
 	}

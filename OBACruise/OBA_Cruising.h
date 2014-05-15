@@ -7,6 +7,7 @@ class OBA_Cruising {
 
 		static void activateCruising();
 		static void stopCruising();
+		static void accelerationRequest();
 		static void suspendCruising();
 		static void resumeCruising();
 		static bool validateCruisingRequest();
