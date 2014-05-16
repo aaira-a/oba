@@ -94,29 +94,6 @@ bool CRUISE::validateCruisingRequest() {
 	else return false;
 }
 
-void CRUISE::requestCurrentSpeed() {  			// delegate call to shaft ? or move method to shaft ?
-
-}   
-
-void CRUISE::setCruisingSpeed() {
-
-}
-
-void CRUISE::requestCalibrationStatus() {		// delegate call to calibration controller ? or move method to calibration ?
-
-}	
-
-void CRUISE::requestDrivingStationStatus() { 	// delegate call to dsta ? or move method to dsta?
-
-}	
-
-void CRUISE::requestMaintainSpeed() {			// delegate call to thro? or maintain logic here ?
-// start with activate cruising to handle first
-}	
-
-void CRUISE::requestStopMaintainSpeed() {		// delegate call to thro? or maintain logic here ?
-
-}
 
 bool CRUISE::getIsActive() {
 	return isActive;
