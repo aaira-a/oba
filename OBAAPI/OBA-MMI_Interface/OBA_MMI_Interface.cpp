@@ -3,6 +3,7 @@
 #include "OBA_MMI_Interface.h"
 #include "../OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../../OBACruise/OBA_Cruising.h"
+#include "../../OBACalibration/OBA_Calibration.h"
 #include <string>
 #include <cstring>
 
@@ -115,6 +116,14 @@ void MMI::keyPressHandler(int pressedKey) {
 
 	case KEY_RESUME:
 		CRUISE::resumeCruising();
+		break;
+
+	case KEY_START_CALIBRATION:
+		CALIB::startCalibration();
+		break;
+
+	case KEY_STOP_CALIBRATION:
+		CALIB::stopCalibration();
 		break;
 
 	default :
