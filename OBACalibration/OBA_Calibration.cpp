@@ -11,7 +11,7 @@ OBA_Calibration::OBA_Calibration() {
 }
 
 	static const double calibrationDefault = 5291.0053; 
-	static double calibrationValue = 0;
+	static double calibrationValue = 5291.0053;
 	static bool isCalibrating = 0;
 	static unsigned int initialPulse = 0;
 	static unsigned int endPulse = 0;
@@ -86,7 +86,7 @@ void CALIB::stopCalibration() {
 
 bool CALIB::validateCalibrationRequest() {
 	if (!CRUISE::getIsActive()) {
-		cout << "\ncruise isnotactive, return true to calib request\n" << endl;
+		cout << "\ncruise isnotactive, proceed to calibration\n" << endl;
 		return true;
 
 	}
