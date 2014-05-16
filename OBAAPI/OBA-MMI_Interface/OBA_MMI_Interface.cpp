@@ -54,7 +54,7 @@ void MMI::sendLEDsignal(int ledNumber, bool ledBool) {
 		led -> led_2 = ledBool;	//center // yellow	// care to speed
 	}
 
-	if (ledNumber == 2) {
+	if (ledNumber == 3) {
 		led -> led_3 = ledBool;	//right  // red		// hazard bolting
 	}
 
