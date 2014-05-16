@@ -5,7 +5,7 @@
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
 #include <iostream>
 
-using namespace std; 
+using namespace std;
 
 OBA_Calibration::OBA_Calibration() {
 }
@@ -19,33 +19,21 @@ OBA_Calibration::OBA_Calibration() {
 
 
 void CALIB::startCalibration() {
-	if (validateCalibrationRequest()) {
-		cout << "\nstartcalib after validated true\n" << endl;
-
-		// do calibration
-		// // check for file existence
-		// // // if exist, load
-		// // // else create
-
-		// // read file
-		// // // format ok?
-		// // // load
-		// // // set state
-
-		//  during calib
-
+	if (!CRUISE::getIsActive()) {
 		isCalibrating = 1;
-
 		initialPulse = SHAFT::getCurrentPulse();
-		cout << "\ninitialPulse : " << initialPulse << endl;
-		// speed must be 0
-		// start pulse
-		// end pulse
-		// validate error range
-		// save to file
-		// if fail to save, revert to default
-		// set internal var: calibvalue & isCalibrating=0
 
+		cout << "\n\n Start Calibration - "				 					<<
+				"\n Auto Cruise isActive : " 	<< CRUISE::getIsActive()	<<
+				"\n isCalibrating : " 			<< isCalibrating 			<<
+				"\n initialPulse  : "			<< initialPulse				<<
+				"\n";
+	}
+
+	else {
+		cout << "\n\n Calibration not started - "
+				"\n Auto Cruise isActive : " 	<< CRUISE::getIsActive()	<<
+				"\n";
 	}
 
 }
@@ -54,43 +42,49 @@ void CALIB::stopCalibration() {
 
 	if (isCalibrating) {
 		endPulse = SHAFT::getCurrentPulse();
-		cout << "\nendPulse : " << endPulse << endl;
-	}
-	tempCalibrationValue = endPulse - initialPulse;
+		tempCalibrationValue = endPulse - initialPulse;
+	
+		if ( (abs(tempCalibrationValue-calibrationDefault))/static_cast<double>(5921)*100 <= 20) {
+			calibrationValue = tempCalibrationValue;
 
-	cout << "\ntempCalibrationValue : " << tempCalibrationValue << endl;
+			cout << "\n\n Stopping Calibration - " 			<<
+					"\n isCalibrating : "					<<	isCalibrating 			<<
+					"\n initialPulse : "					<<	initialPulse 			<<
+					"\n endPulse : "						<<	endPulse				<<
+					"\n tempCalibrationValue : "			<<	tempCalibrationValue 	<<
+					"\n New calibrationValue : "			<<	calibrationValue 		<<
+					"\n Within Tolerance : Yes \n"			;
+		}
 
-	initialPulse = 0;
-	endPulse = 0;
+		else {
+			calibrationValue = calibrationDefault;
 
-	if ( (abs(tempCalibrationValue-calibrationDefault))/static_cast<double>(5921)*100 <= 20) {
-		cout << "\nok within 20 percent\n" << endl;
-		calibrationValue = tempCalibrationValue;
+			cout << "\n\n Stopping Calibration - "			<<
+					"\n isCalibrating : "					<<	isCalibrating 			<<
+					"\n initialPulse : "					<<	initialPulse 			<<
+					"\n endPulse : "						<<	endPulse				<<
+					"\n tempCalibrationValue : "			<<	tempCalibrationValue 	<<
+					"\n New calibrationValue : "			<<	calibrationValue 		<<
+					"\n Within Tolerance : No \n"			;
+		}
+
 		isCalibrating = 0;
 		initialPulse = 0;
 		endPulse = 0;
 		tempCalibrationValue = 0;
 
-		cout << "\n isCalibrating : " << isCalibrating <<
-				"\n initialPulse : " << initialPulse <<
-				"\n endPulse : " << endPulse <<
-				"\n tempCalibrationValue : " << tempCalibrationValue <<
-				"\n calibrationValue : " <<calibrationValue << endl;
+		cout << "\n\n Reset state - "			<<
+		     	"\n isCalibrating : "			<<		isCalibrating		<<
+		     	"\n initialPulse : "			<<		initialPulse		<<
+		        "\n endPulse : "				<<		endPulse 			<<
+		        "\n tempCalibrationValue : "	<<		tempCalibrationValue<<
+		        "\n";
 	}
 
 	else {
-		calibrationValue = calibrationDefault;
+		cout << "\n\n Stopping Calibration - "	<<
+				"\n isCalibrating : "			<<	isCalibrating 			<<
+				"\n Auto Cruise isActive : " 	<< CRUISE::getIsActive()	<<
+				"\n Ignore input \n";	
 	}
-
-}
-
-bool CALIB::validateCalibrationRequest() {
-	if (!CRUISE::getIsActive()) {
-		cout << "\ncruise isnotactive, proceed to calibration\n" << endl;
-		return true;
-
-	}
-
-	else return false;
-
 }

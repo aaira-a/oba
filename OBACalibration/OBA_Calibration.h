@@ -7,8 +7,6 @@ class OBA_Calibration {
 
 		static void startCalibration();
 		static void stopCalibration();
-		static bool validateCalibrationRequest();
-
 };
 
 typedef OBA_Calibration	CALIB;
