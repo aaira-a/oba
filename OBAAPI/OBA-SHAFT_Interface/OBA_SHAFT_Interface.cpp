@@ -4,12 +4,13 @@
 #include "../OBA-MMI_Interface/OBA_MMI_Interface.h"
 #include "../../OBACalibration/OBA_Calibration.h"
 
+
 OBA_SHAFT_Interface::OBA_SHAFT_Interface() {
 
 }
 
 
-double calibrationReference = CALIB::getCalibrationValue();
+static double calibrationReference = 5291.0053;
 static unsigned int lastpulse = 0;
 static double speed = 0;
 static unsigned int speedInt = 0;
@@ -51,4 +52,8 @@ double SHAFT::getCurrentSpeed() {
 
 unsigned int SHAFT::getCurrentSpeedInt() {
 	return speedInt;
+}
+
+void SHAFT::setCalibrationReference(double calibrationOverride) {
+	calibrationReference = calibrationOverride;
 }

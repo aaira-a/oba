@@ -8,6 +8,7 @@ class OBA_SHAFT_Interface {
 		static void calculateSpeed();
 		static double getCurrentSpeed();
 		static unsigned int getCurrentSpeedInt();
+		static void setCalibrationReference(double calibrationOverride);
 };
 
 typedef OBA_SHAFT_Interface		SHAFT;

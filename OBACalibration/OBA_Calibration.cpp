@@ -68,6 +68,7 @@ void CALIB::stopCalibration() {
 					"\n Within Tolerance : No \n"			;
 		}
 
+		SHAFT::setCalibrationReference(calibrationValue);
 		isCalibrating = 0;
 		initialPulse = 0;
 		endPulse = 0;
