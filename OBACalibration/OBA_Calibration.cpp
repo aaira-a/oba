@@ -88,3 +88,7 @@ void CALIB::stopCalibration() {
 				"\n Ignore input \n";	
 	}
 }
+
+bool CALIB::getIsCalibrating () {
+	return isCalibrating;
+}

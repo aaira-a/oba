@@ -5,6 +5,7 @@
 #include "../OBAAPI/OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
+#include "../OBACalibration/OBA_Calibration.h"
 
 OBA_Cruising::OBA_Cruising() {
 }
@@ -77,11 +78,11 @@ void CRUISE::resumeCruising() {
 
 bool CRUISE::validateCruisingRequest() {
 	
-	if (/*add !calib::isCalibrating()?*/ 
-		DSTA::getIgnitionState() && 
-		!DSTA::getBrakeState() && 
-		!DSTA::getClutchState() &&
-		DSTA::getEngagedGearState()==5) {
+	if ( ! CALIB::getIsCalibrating() &&
+		   DSTA::getIgnitionState() && 
+		 ! DSTA::getBrakeState() && 
+		 ! DSTA::getClutchState() &&
+		   DSTA::getEngagedGearState()==5) {
 
 			if (SHAFT::getCurrentSpeed() >= 80 && 
 				SHAFT::getCurrentSpeed() <= 130) {
