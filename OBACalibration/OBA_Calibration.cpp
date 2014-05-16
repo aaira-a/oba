@@ -89,6 +89,11 @@ void CALIB::stopCalibration() {
 	}
 }
 
-bool CALIB::getIsCalibrating () {
+bool CALIB::getIsCalibrating() {
 	return isCalibrating;
+}
+
+double CALIB::getCalibrationValue() {
+	return calibrationValue;
+
 }
