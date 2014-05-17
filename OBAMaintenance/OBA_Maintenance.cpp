@@ -1,8 +1,8 @@
 #include "../OBAKERNEL/OBATargetMachine.h"
 #include "../OBAKERNEL/PortsLayout.h"
 #include "OBA_Maintenance.h"
-//#include "../OBACruise/OBA_Cruising.h"
-//#include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+#include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+
 #include <iostream>
 
 using namespace std;
@@ -19,6 +19,14 @@ OBA_Maintenance::OBA_Maintenance() {
 	static unsigned int GENERAL_REMIND 		= 	24600;
 	static unsigned int GENERAL_WARN 		= 	24920; 
 
-/* void MAINT::methodname() {
 
-} */
+void MAINT::maintenanceRoutine() {
+
+	cout << getCurrentMileage() << endl;
+
+}
+
+unsigned int MAINT::getCurrentMileage() {
+	currentMileage = SHAFT::getCurrentPulse() / SHAFT::getCalibrationReference();
+	return currentMileage;
+}

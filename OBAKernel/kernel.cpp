@@ -8,6 +8,7 @@
 #include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 #include "../OBAAPI/OBA-DSTA_Interface/OBA_DSTA_Interface.h"
 #include "../OBACruise/OBA_Cruising.h"
+#include "../OBAMAintenance/OBA_Maintenance.h"
 
 using namespace std;
 
@@ -35,6 +36,8 @@ void myInterruptHandler (Interrupt sig) {
 			if (CRUISE::getIsActive() == 1) {
 				THRO::maintainSpeed();
 			}
+
+			MAINT::maintenanceRoutine();
 		break;
 
 	default :

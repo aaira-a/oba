@@ -56,3 +56,7 @@ unsigned int SHAFT::getCurrentSpeedInt() {
 void SHAFT::setCalibrationReference(double calibrationOverride) {
 	calibrationReference = calibrationOverride;
 }
+
+unsigned int SHAFT::getCalibrationReference() {
+	return static_cast<unsigned int>(calibrationReference);
+}
