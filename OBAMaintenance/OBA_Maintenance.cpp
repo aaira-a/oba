@@ -63,37 +63,37 @@ void MAINT::maintenanceChecker() {
 
 	cout << getCurrentMileage() << endl;
 
-	if (currentMileage >= KM_OIL_CHANGE_REMIND) {
+	if (currentMileage - lastOilChange >= KM_OIL_CHANGE_REMIND) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 1;
 		MESSAGE 			 = OIL_REMIND;
 	}
 
-	if (currentMileage >= KM_OIL_CHANGE_WARN) {
+	if (currentMileage - lastOilChange >= KM_OIL_CHANGE_WARN) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 0;
 		MESSAGE 			 = OIL_WARN;
 	}
 
-	if (currentMileage >= KM_AIR_FILTER_REMIND) {
+	if (currentMileage - lastAirFilterChange >= KM_AIR_FILTER_REMIND) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 1;
 		MESSAGE 			 = AIR_REMIND;
 	}
 
-	if (currentMileage >= KM_AIR_FILTER_WARN) {
+	if (currentMileage - lastAirFilterChange >= KM_AIR_FILTER_WARN) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 0;
 		MESSAGE 			 = AIR_WARN;
 	}
 
-	if (currentMileage >= KM_GENERAL_REMIND) {
+	if (currentMileage - lastGeneralService >= KM_GENERAL_REMIND) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 1;
 		MESSAGE 			 = GEN_REMIND;		
 	}
 
-	if (currentMileage >= KM_GENERAL_WARN) {
+	if (currentMileage - lastGeneralService >= KM_GENERAL_WARN) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 0;
 		MESSAGE 			 = GEN_WARN;		
@@ -174,8 +174,11 @@ void MAINT::serviceDoneHandler() {
 		lastGeneralService = currentMileage;
 		}
 
-	maintenanceMessageOn = 0;
-	
+	maintenanceMessageOn	= 	0;
+	intermittentMessage		= 	0;
+	MESSAGE 				= 	EMPTY;
+	MMI::displayMessage("                          ");
+
 	}
 
 	cout << "\n\n last oilchange : " << lastOilChange <<
