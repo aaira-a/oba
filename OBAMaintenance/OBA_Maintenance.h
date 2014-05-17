@@ -7,7 +7,8 @@ class OBA_Maintenance {
 
 		static void maintenanceRoutine(int tick);
 		static void maintenanceChecker();
-		static void maintenanceMessageService1(int tick);
+		static void maintenanceMessageService(int tick);
+		static void showMaintenanceMessage();
 		static unsigned int getCurrentMileage();
 		static void debugger(unsigned int overrideMileage);
 };

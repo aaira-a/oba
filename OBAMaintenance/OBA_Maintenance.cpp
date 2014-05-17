@@ -23,12 +23,12 @@ OBA_Maintenance::OBA_Maintenance() {
 
 	static unsigned int currentMileage 		= 	0;
 
-	static unsigned int OIL_CHANGE_REMIND	= 	7600;
-	static unsigned int OIL_CHANGE_WARN 	= 	7920;
-	static unsigned int AIR_FILTER_REMIND	= 	14600;
-	static unsigned int AIR_FILTER_WARN 	= 	14920;
-	static unsigned int GENERAL_REMIND 		= 	24600;
-	static unsigned int GENERAL_WARN 		= 	24920; 
+	static unsigned int KM_OIL_CHANGE_REMIND	= 	7600;
+	static unsigned int KM_OIL_CHANGE_WARN 		= 	7920;
+	static unsigned int KM_AIR_FILTER_REMIND	= 	14600;
+	static unsigned int KM_AIR_FILTER_WARN 		= 	14920;
+	static unsigned int KM_GENERAL_REMIND 		= 	24600;
+	static unsigned int KM_GENERAL_WARN 		= 	24920; 
 
 	static unsigned int lastOilChange		=	0;
 	static unsigned int lastAirFilterChange =	0;
@@ -40,17 +40,21 @@ OBA_Maintenance::OBA_Maintenance() {
 
 void MAINT::maintenanceRoutine(int tick) {
 	maintenanceChecker();
-	maintenanceMessageService1(tick);
+	maintenanceMessageService(tick);
 }
 
-void MAINT::maintenanceMessageService1(int tick) {
-	
-	if (tick==4 || tick==3) {
-		MMI::displayMessage("maint msg on              ");
-	} 
+void MAINT::maintenanceMessageService(int tick) {
 
-	if (tick==2 || tick==1) {
-		MMI::displayMessage("maint msg off             ");
+	if (maintenanceMessageOn) {
+	
+		if (intermittentMessage) {
+
+			if (tick==2 || tick==1) {
+				MESSAGE = EMPTY;
+			}
+		}
+
+		showMaintenanceMessage();
 	}
 
 }
@@ -59,39 +63,39 @@ void MAINT::maintenanceChecker() {
 
 	cout << getCurrentMileage() << endl;
 
-	if (currentMileage >= OIL_CHANGE_REMIND) {
+	if (currentMileage >= KM_OIL_CHANGE_REMIND) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 0;
+		intermittentMessage  = 1;
 		MESSAGE 			 = OIL_REMIND;
 	}
 
-	if (currentMileage >= OIL_CHANGE_WARN) {
+	if (currentMileage >= KM_OIL_CHANGE_WARN) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 1;
+		intermittentMessage  = 0;
 		MESSAGE 			 = OIL_WARN;
 	}
 
-	if (currentMileage >= AIR_FILTER_REMIND) {
+	if (currentMileage >= KM_AIR_FILTER_REMIND) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 0;
+		intermittentMessage  = 1;
 		MESSAGE 			 = AIR_REMIND;
 	}
 
-	if (currentMileage >= AIR_FILTER_WARN) {
+	if (currentMileage >= KM_AIR_FILTER_WARN) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 1;
+		intermittentMessage  = 0;
 		MESSAGE 			 = AIR_WARN;
 	}
 
-	if (currentMileage >= GENERAL_REMIND) {
+	if (currentMileage >= KM_GENERAL_REMIND) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 0;
+		intermittentMessage  = 1;
 		MESSAGE 			 = GEN_REMIND;		
 	}
 
-	if (currentMileage >= GENERAL_WARN) {
+	if (currentMileage >= KM_GENERAL_WARN) {
 		maintenanceMessageOn = 1;
-		intermittentMessage  = 1;
+		intermittentMessage  = 0;
 		MESSAGE 			 = GEN_WARN;		
 	}
 
@@ -107,12 +111,35 @@ void MAINT::debugger(unsigned int overrideMileage) {
 	currentMileage = overrideMileage;
 }
 
-/*
-MMI::displayMessage("OIL CHANGE REMINDER       ");
-MMI::displayMessage("OIL CHANGE WARNING        ");
-MMI::displayMessage("AIR FILTER REMINDER       ");
-MMI::displayMessage("AIR FILTER WARNING        ");
-MMI::displayMessage("GEN.SERVICE REMINDER      ");
-MMI::displayMessage("GEN.SERVICE WARNING       ");
+void MAINT::showMaintenanceMessage() {
 
-*/
+	switch (MESSAGE) {
+
+	case EMPTY:
+		MMI::displayMessage("                          ");
+		break;
+
+	case OIL_REMIND:
+		MMI::displayMessage("OIL CHANGE REMINDER       ");
+		break;
+
+	case OIL_WARN:
+		MMI::displayMessage("OIL CHANGE WARNING        ");
+		break;
+
+	case AIR_REMIND:
+		MMI::displayMessage("AIR FILTER REMINDER       ");
+		break;
+
+	case AIR_WARN:
+		MMI::displayMessage("AIR FILTER WARNING        ");
+		break;
+
+	case GEN_REMIND:
+		MMI::displayMessage("GEN.SERVICE REMINDER      ");
+		break;
+
+	case GEN_WARN:
+		MMI::displayMessage("GEN.SERVICE WARNING       ");
+	}
+}
