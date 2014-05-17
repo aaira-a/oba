@@ -11,12 +11,12 @@ using namespace std;
 OBA_Calibration::OBA_Calibration() {
 }
 
-	static const double calibrationDefault = 5291.0053; 
-	static double calibrationValue = 5291.0053;
+	static const int calibrationDefault = 5291; 
+	static int calibrationValue = 5291;
 	static bool isCalibrating = 0;
 	static unsigned int initialPulse = 0;
 	static unsigned int endPulse = 0;
-	static double tempCalibrationValue = 0;
+	static int tempCalibrationValue = 0;
 
 
 void CALIB::startCalibration() {
@@ -47,7 +47,7 @@ void CALIB::stopCalibration() {
 		endPulse = SHAFT::getCurrentPulse();
 		tempCalibrationValue = endPulse - initialPulse;
 	
-		if ( (abs(tempCalibrationValue-calibrationDefault))/static_cast<double>(5921)*100 <= 20) {
+		if ( ((abs(tempCalibrationValue-calibrationDefault))/(5921*100)) <= 20  && tempCalibrationValue!=0) {
 			calibrationValue = tempCalibrationValue;
 
 			cout << "\n\n Stopping Calibration - " 			<<
