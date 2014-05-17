@@ -38,9 +38,21 @@ OBA_Maintenance::OBA_Maintenance() {
 	static bool intermittentMessage 		= 	0;
 	static enum MAINT_MSG MESSAGE 			=	EMPTY;
 
-void MAINT::maintenanceRoutine() {
-	
+void MAINT::maintenanceRoutine(int tick) {
 	maintenanceChecker();
+	maintenanceMessageService1(tick);
+}
+
+void MAINT::maintenanceMessageService1(int tick) {
+	
+	if (tick==4 || tick==3) {
+		MMI::displayMessage("maint msg on              ");
+	} 
+
+	if (tick==2 || tick==1) {
+		MMI::displayMessage("maint msg off             ");
+	}
+
 }
 
 void MAINT::maintenanceChecker() {

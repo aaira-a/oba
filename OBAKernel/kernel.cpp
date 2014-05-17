@@ -14,6 +14,7 @@ using namespace std;
 
 static const unsigned int	periodInMillisecond = 1000; 
 
+static unsigned int tick = 4;
 
 void myInterruptHandler (Interrupt sig) {
 	
@@ -37,7 +38,11 @@ void myInterruptHandler (Interrupt sig) {
 				THRO::maintainSpeed();
 			}
 
-			MAINT::maintenanceRoutine();
+			MAINT::maintenanceRoutine(tick--);
+
+			if (tick==0) {
+				tick = 4;
+			}
 		break;
 
 	default :
