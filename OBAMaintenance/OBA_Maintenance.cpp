@@ -39,6 +39,8 @@ OBA_Maintenance::OBA_Maintenance() {
 	static enum MAINT_MSG MESSAGE 			=	EMPTY;
 
 void MAINT::maintenanceRoutine(int tick) {
+	//cout << "currentmileage : " << getCurrentMileage() <<endl;
+	getCurrentMileage();
 	maintenanceChecker();
 	maintenanceMessageService(tick);
 }
