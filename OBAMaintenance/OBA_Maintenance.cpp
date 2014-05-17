@@ -61,8 +61,6 @@ void MAINT::maintenanceMessageService(int tick) {
 
 void MAINT::maintenanceChecker() {
 
-	cout << "\ncurrentMileage : " << getCurrentMileage() << endl;
-
 	if (currentMileage - lastOilChange >= KM_OIL_CHANGE_REMIND) {
 		maintenanceMessageOn = 1;
 		intermittentMessage  = 1;
@@ -108,6 +106,8 @@ unsigned int MAINT::getCurrentMileage() {
 
 void MAINT::debugger(unsigned int overrideMileage) {
 	currentMileage = overrideMileage;
+	cout << "\n currentMileage : " << getCurrentMileage() << endl;
+
 }
 
 void MAINT::showMaintenanceMessage() {
