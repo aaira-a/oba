@@ -3,6 +3,7 @@
 #include "OBA_Calibration.h"
 #include "../OBACruise/OBA_Cruising.h"
 #include "../OBAAPI/OBA-SHAFT_Interface/OBA_SHAFT_Interface.h"
+#include "../OBAAPI/OBA-MMI_Interface/OBA_MMI_Interface.h"
 #include <iostream>
 
 using namespace std;
@@ -20,6 +21,7 @@ OBA_Calibration::OBA_Calibration() {
 
 void CALIB::startCalibration() {
 	if (!CRUISE::getIsActive()) {
+		MMI::displayMessage("Calibration On            ");
 		isCalibrating = 1;
 		initialPulse = SHAFT::getCurrentPulse();
 
@@ -41,6 +43,7 @@ void CALIB::startCalibration() {
 void CALIB::stopCalibration() {
 
 	if (isCalibrating) {
+		MMI::displayMessage("Calibration Stop           ");
 		endPulse = SHAFT::getCurrentPulse();
 		tempCalibrationValue = endPulse - initialPulse;
 	
