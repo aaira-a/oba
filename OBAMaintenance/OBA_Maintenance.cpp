@@ -61,7 +61,7 @@ void MAINT::maintenanceMessageService(int tick) {
 
 void MAINT::maintenanceChecker() {
 
-	cout << getCurrentMileage() << endl;
+	cout << "\ncurrentMileage : " << getCurrentMileage() << endl;
 
 	if (currentMileage - lastOilChange >= KM_OIL_CHANGE_REMIND) {
 		maintenanceMessageOn = 1;
@@ -99,7 +99,6 @@ void MAINT::maintenanceChecker() {
 		MESSAGE 			 = GEN_WARN;		
 	}
 
-	cout << MESSAGE << endl;
 }
 
 unsigned int MAINT::getCurrentMileage() {
@@ -159,18 +158,24 @@ void MAINT::serviceDoneHandler() {
 		break;
 
 		case AIR_REMIND:
+		lastOilChange = currentMileage;
 		lastAirFilterChange = currentMileage;
 		break;
 
 		case AIR_WARN:
+		lastOilChange = currentMileage;
 		lastAirFilterChange = currentMileage;
 		break;
 
 		case GEN_REMIND:
+		lastOilChange = currentMileage;
+		lastAirFilterChange = currentMileage;		
 		lastGeneralService = currentMileage;
 		break;
 
 		case GEN_WARN:
+		lastOilChange = currentMileage;
+		lastAirFilterChange = currentMileage;		
 		lastGeneralService = currentMileage;
 		}
 
@@ -179,11 +184,18 @@ void MAINT::serviceDoneHandler() {
 	MESSAGE 				= 	EMPTY;
 	MMI::displayMessage("                          ");
 
-	}
-
-	cout << "\n\n last oilchange : " << lastOilChange <<
+	cout << "\n\n service done~ " << 
+			"\n last oilchange : " << lastOilChange <<
 			"\n last airfilter : " << lastAirFilterChange <<
 			"\n last gensvc : "	<<	lastGeneralService <<
 			"\n";
 
+	}
+
+	else {cout << "\n\n service not due~ " <<
+			"\n last oilchange : " << lastOilChange <<
+			"\n last airfilter : " << lastAirFilterChange <<
+			"\n last gensvc : "	<<	lastGeneralService <<
+			"\n";
+	}
 }
