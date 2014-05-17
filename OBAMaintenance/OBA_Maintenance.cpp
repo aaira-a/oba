@@ -11,7 +11,17 @@ using namespace std;
 OBA_Maintenance::OBA_Maintenance() {
 }
 
-	static unsigned int currentMileage = 0;
+	enum MAINT_MSG {
+		EMPTY,
+		OIL_REMIND,
+		OIL_WARN,
+		AIR_REMIND, 
+		AIR_WARN,
+		GEN_REMIND,
+		GEN_WARN,
+	};
+
+	static unsigned int currentMileage 		= 	0;
 
 	static unsigned int OIL_CHANGE_REMIND	= 	7600;
 	static unsigned int OIL_CHANGE_WARN 	= 	7920;
@@ -24,6 +34,10 @@ OBA_Maintenance::OBA_Maintenance() {
 	static unsigned int lastAirFilterChange =	0;
 	static unsigned int lastGeneralService  =	0;
 
+	static bool maintenanceMessageOn		=	0;
+	static bool intermittentMessage 		= 	0;
+	static enum MAINT_MSG MESSAGE 			=	EMPTY;
+
 void MAINT::maintenanceRoutine() {
 	
 	maintenanceChecker();
@@ -34,28 +48,42 @@ void MAINT::maintenanceChecker() {
 	cout << getCurrentMileage() << endl;
 
 	if (currentMileage >= OIL_CHANGE_REMIND) {
-		MMI::displayMessage("OIL CHANGE REMINDER       ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 0;
+		MESSAGE 			 = OIL_REMIND;
 	}
 
 	if (currentMileage >= OIL_CHANGE_WARN) {
-		MMI::displayMessage("OIL CHANGE WARNING        ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 1;
+		MESSAGE 			 = OIL_WARN;
 	}
 
 	if (currentMileage >= AIR_FILTER_REMIND) {
-		MMI::displayMessage("AIR FILTER REMINDER       ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 0;
+		MESSAGE 			 = AIR_REMIND;
 	}
 
 	if (currentMileage >= AIR_FILTER_WARN) {
-		MMI::displayMessage("AIR FILTER WARNING        ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 1;
+		MESSAGE 			 = AIR_WARN;
 	}
 
 	if (currentMileage >= GENERAL_REMIND) {
-		MMI::displayMessage("GEN.SERVICE REMINDER      ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 0;
+		MESSAGE 			 = GEN_REMIND;		
 	}
 
 	if (currentMileage >= GENERAL_WARN) {
-		MMI::displayMessage("GEN.SERVICE WARNING       ");
+		maintenanceMessageOn = 1;
+		intermittentMessage  = 1;
+		MESSAGE 			 = GEN_WARN;		
 	}
+
+	cout << MESSAGE << endl;
 }
 
 unsigned int MAINT::getCurrentMileage() {
@@ -66,3 +94,13 @@ unsigned int MAINT::getCurrentMileage() {
 void MAINT::debugger(unsigned int overrideMileage) {
 	currentMileage = overrideMileage;
 }
+
+/*
+MMI::displayMessage("OIL CHANGE REMINDER       ");
+MMI::displayMessage("OIL CHANGE WARNING        ");
+MMI::displayMessage("AIR FILTER REMINDER       ");
+MMI::displayMessage("AIR FILTER WARNING        ");
+MMI::displayMessage("GEN.SERVICE REMINDER      ");
+MMI::displayMessage("GEN.SERVICE WARNING       ");
+
+*/
