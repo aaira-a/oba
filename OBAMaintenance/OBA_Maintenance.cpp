@@ -20,8 +20,17 @@ OBA_Maintenance::OBA_Maintenance() {
 	static unsigned int GENERAL_REMIND 		= 	24600;
 	static unsigned int GENERAL_WARN 		= 	24920; 
 
+	static unsigned int lastOilChange		=	0;
+	static unsigned int lastAirFilterChange =	0;
+	static unsigned int lastGeneralService  =	0;
 
 void MAINT::maintenanceRoutine() {
+	
+	maintenanceChecker();
+}
+
+void MAINT::maintenanceChecker() {
+
 	cout << getCurrentMileage() << endl;
 
 	if (currentMileage >= OIL_CHANGE_REMIND) {
