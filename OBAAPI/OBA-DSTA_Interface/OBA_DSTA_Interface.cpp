@@ -50,11 +50,4 @@ void DSTA::handleDSTAinterrupt(DrivingStationInterruptStatusWord *whatChanged) {
 		if (whatChanged->ignitionFlag) {
 			CRUISE::stopCruising();
 		}
-
-		/*	cout << "\n\naccelerator: " << eventDSTA->acceleratorFlag <<
-		"\nbrake: " << eventDSTA->brakeFlag <<
-		"\nclutch:" << eventDSTA->clutchFlag <<
-		"\nignition:" << eventDSTA-> ignitionFlag;
-		*/
-
 }
