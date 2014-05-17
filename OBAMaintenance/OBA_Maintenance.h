@@ -7,6 +7,7 @@ class OBA_Maintenance {
 
 		static void maintenanceRoutine();
 		static unsigned int getCurrentMileage();
+		static void debugger(unsigned int overrideMileage);
 };
 
 typedef OBA_Maintenance		MAINT;

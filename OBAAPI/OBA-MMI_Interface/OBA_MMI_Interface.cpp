@@ -4,6 +4,7 @@
 #include "../OBA-THRO_Interface/OBA_THRO_Interface.h"
 #include "../../OBACruise/OBA_Cruising.h"
 #include "../../OBACalibration/OBA_Calibration.h"
+#include "../../OBAMaintenance/OBA_Maintenance.h"
 #include <string>
 #include <cstring>
 
@@ -126,6 +127,30 @@ void MMI::keyPressHandler(int pressedKey) {
 		CALIB::stopCalibration();
 		break;
 
+	case KEY_1:
+		MAINT::debugger(7600);
+		break;
+
+	case KEY_2:
+		MAINT::debugger(7920);
+		break;
+
+	case KEY_3:
+		MAINT::debugger(14600);
+		break;
+
+	case KEY_4:
+		MAINT::debugger(14920);
+		break;
+
+	case KEY_5:
+		MAINT::debugger(24600);
+		break;
+
+	case KEY_6:
+		MAINT::debugger(24920);
+		break;
+		
 	default :
 		break;
 	}
