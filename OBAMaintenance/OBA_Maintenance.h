@@ -11,6 +11,7 @@ class OBA_Maintenance {
 		static void showMaintenanceMessage();
 		static unsigned int getCurrentMileage();
 		static void debugger(unsigned int overrideMileage);
+		static void serviceDoneHandler();
 };
 
 typedef OBA_Maintenance		MAINT;

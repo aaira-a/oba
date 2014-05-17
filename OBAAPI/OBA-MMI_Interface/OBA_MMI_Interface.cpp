@@ -127,6 +127,10 @@ void MMI::keyPressHandler(int pressedKey) {
 		CALIB::stopCalibration();
 		break;
 
+	case KEY_SERVICE_COMPLETED:
+		MAINT::serviceDoneHandler();
+		break;
+
 	case KEY_1:
 		MAINT::debugger(7600);
 		break;

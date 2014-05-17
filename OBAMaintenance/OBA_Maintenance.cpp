@@ -143,3 +143,44 @@ void MAINT::showMaintenanceMessage() {
 		MMI::displayMessage("GEN.SERVICE WARNING       ");
 	}
 }
+
+void MAINT::serviceDoneHandler() {
+	
+	if (maintenanceMessageOn) {
+		
+		switch (MESSAGE) {
+
+		case OIL_REMIND:
+		lastOilChange = currentMileage;
+		break;
+
+		case OIL_WARN:
+		lastOilChange = currentMileage;
+		break;
+
+		case AIR_REMIND:
+		lastAirFilterChange = currentMileage;
+		break;
+
+		case AIR_WARN:
+		lastAirFilterChange = currentMileage;
+		break;
+
+		case GEN_REMIND:
+		lastGeneralService = currentMileage;
+		break;
+
+		case GEN_WARN:
+		lastGeneralService = currentMileage;
+		}
+
+	maintenanceMessageOn = 0;
+	
+	}
+
+	cout << "\n\n last oilchange : " << lastOilChange <<
+			"\n last airfilter : " << lastAirFilterChange <<
+			"\n last gensvc : "	<<	lastGeneralService <<
+			"\n";
+
+}
